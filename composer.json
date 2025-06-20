@@ -1,13 +1,14 @@
 {
-    "name": "knplabs/doctrine-behaviors",
+    "name": "tooalu/doctrine-behaviors",
     "description": "Doctrine Behavior Traits",
     "type": "symfony-bundle",
     "keywords": [
         "behaviors", "doctrine", "timestampable", "translatable", "blameable", "softdeletable", "tree", "uuid"
     ],
-    "homepage": "http://knplabs.com",
+    "homepage": "http://www.toovalu.com",
     "license": "MIT",
     "authors": [
+        { "name": "Toovalu", "homepage": "http://www.toovalu.com" },
         { "name": "Knplabs", "homepage": "http://knplabs.com" }
     ],
     "require": {
