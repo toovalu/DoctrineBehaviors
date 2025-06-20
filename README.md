@@ -1,5 +1,7 @@
 # Doctrine Behaviors
 
+It's a fork !
+
 [![Downloads](https://img.shields.io/packagist/dt/knplabs/doctrine-behaviors.svg?style=flat-square)](https://packagist.org/packages/knplabs/doctrine-behaviors)
 
 This PHP library is a collection of traits and interfaces that add behaviors to Doctrine entities and repositories.
