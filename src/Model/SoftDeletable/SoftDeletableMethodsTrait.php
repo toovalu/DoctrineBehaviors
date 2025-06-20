@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Model\SoftDeletable;
 
-use DateTime;
-use DateTimeInterface;
-use DateTimeZone;
 use Knp\DoctrineBehaviors\Exception\ShouldNotHappenException;
 
 trait SoftDeletableMethodsTrait
@@ -17,7 +14,7 @@ trait SoftDeletableMethodsTrait
     }
 
     /**
-     * Restore entity by undeleting it
+     * Restore entity by undeleting it.
      */
     public function restore(): void
     {
@@ -33,37 +30,37 @@ trait SoftDeletableMethodsTrait
         return false;
     }
 
-    public function willBeDeleted(?DateTimeInterface $deletedAt = null): bool
+    public function willBeDeleted(?\DateTimeInterface $deletedAt = null): bool
     {
         if ($this->deletedAt === null) {
             return false;
         }
 
-        if ($deletedAt === null) {
+        if (!$deletedAt instanceof \DateTimeInterface) {
             return true;
         }
 
         return $this->deletedAt <= $deletedAt;
     }
 
-    public function getDeletedAt(): ?DateTimeInterface
+    public function getDeletedAt(): ?\DateTimeInterface
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(?DateTimeInterface $deletedAt): void
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
     }
 
-    private function currentDateTime(): DateTimeInterface
+    private function currentDateTime(): \DateTimeInterface
     {
-        $dateTime = DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)));
+        $dateTime = \DateTime::createFromFormat('U.u', \sprintf('%.6F', microtime(true)));
         if ($dateTime === false) {
             throw new ShouldNotHappenException();
         }
 
-        $dateTime->setTimezone(new DateTimeZone(date_default_timezone_get()));
+        $dateTime->setTimezone(new \DateTimeZone(date_default_timezone_get()));
 
         return $dateTime;
     }

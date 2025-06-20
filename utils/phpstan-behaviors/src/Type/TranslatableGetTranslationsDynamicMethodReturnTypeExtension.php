@@ -16,7 +16,6 @@ use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function in_array;
 
 final class TranslatableGetTranslationsDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -32,7 +31,7 @@ final class TranslatableGetTranslationsDynamicMethodReturnTypeExtension implemen
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array($methodReflection->getName(), ['getTranslations', 'getNewTranslations'], true);
+        return \in_array($methodReflection->getName(), ['getTranslations', 'getNewTranslations'], true);
     }
 
     public function getTypeFromMethodCall(

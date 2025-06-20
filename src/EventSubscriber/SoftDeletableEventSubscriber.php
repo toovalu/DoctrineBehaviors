@@ -23,7 +23,7 @@ final class SoftDeletableEventSubscriber implements EventSubscriberInterface
         $unitOfWork = $entityManager->getUnitOfWork();
 
         foreach ($unitOfWork->getScheduledEntityDeletions() as $entity) {
-            if (! $entity instanceof SoftDeletableInterface) {
+            if (!$entity instanceof SoftDeletableInterface) {
                 continue;
             }
 
@@ -47,7 +47,7 @@ final class SoftDeletableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (! is_a($classMetadata->reflClass->getName(), SoftDeletableInterface::class, true)) {
+        if (!is_a($classMetadata->reflClass->getName(), SoftDeletableInterface::class, true)) {
             return;
         }
 

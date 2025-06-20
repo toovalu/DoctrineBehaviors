@@ -27,10 +27,11 @@ final class EntityUserProvider implements UserProviderInterface
 
     public function changeUser(string $userName): void
     {
-        if ($this->userEntities !== [] && array_key_exists($userName, $this->userEntities)) {
+        if ($this->userEntities !== [] && \array_key_exists($userName, $this->userEntities)) {
             $this->userEntity = $this->userEntities[$userName];
         } else {
-            $errorMessage = sprintf('User with %s name was not found. Add it first.', $userName);
+            $errorMessage = \sprintf('User with %s name was not found. Add it first.', $userName);
+
             throw new ShouldNotHappenException($errorMessage);
         }
     }

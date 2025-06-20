@@ -7,7 +7,7 @@ namespace Knp\DoctrineBehaviors\Contract\Entity;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Tree\Node defines a set of needed methods to work with materialized path tree nodes
+ * Tree\Node defines a set of needed methods to work with materialized path tree nodes.
  */
 interface TreeNodeInterface
 {
@@ -50,7 +50,7 @@ interface TreeNodeInterface
      *    - modify the parent of this node
      *    - Add this node to the children of the new parent
      *    - Remove this node from the children of the old parent
-     *    - Modify the materialized path of this node and all its children, recursively
+     *    - Modify the materialized path of this node and all its children, recursively.
      */
     public function setChildNodeOf(?self $treeNode = null): void;
 
@@ -72,7 +72,7 @@ interface TreeNodeInterface
     public function getNodeLevel(): int;
 
     /**
-     * Builds a hierarchical tree from a flat collection of NodeInterface elements
+     * Builds a hierarchical tree from a flat collection of NodeInterface elements.
      *
      * @param self[] $treeNodes
      */

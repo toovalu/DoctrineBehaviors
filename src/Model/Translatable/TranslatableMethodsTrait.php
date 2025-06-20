@@ -26,6 +26,7 @@ trait TranslatableMethodsTrait
 
     /**
      * @param Collection<string, TranslationInterface> $translations
+     *
      * @phpstan-param iterable<TranslationInterface> $translations
      */
     public function setTranslations(iterable $translations): void
@@ -66,7 +67,7 @@ trait TranslatableMethodsTrait
     /**
      * Returns translation for specific locale (creates new one if doesn't exists). If requested translation doesn't
      * exist, it will first try to fallback default locale If any translation doesn't exist, it will be added to
-     * newTranslations collection. In order to persist new translations, call mergeNewTranslations method, before flush
+     * newTranslations collection. In order to persist new translations, call mergeNewTranslations method, before flush.
      *
      * @param string $locale The locale (en, ru, fr) | null If null, will try with current locale
      */
@@ -81,7 +82,7 @@ trait TranslatableMethodsTrait
     public function mergeNewTranslations(): void
     {
         foreach ($this->getNewTranslations() as $newTranslation) {
-            if (! $this->getTranslations()->contains($newTranslation) && ! $newTranslation->isEmpty()) {
+            if (!$this->getTranslations()->contains($newTranslation) && !$newTranslation->isEmpty()) {
                 $this->addTranslation($newTranslation);
                 $this->getNewTranslations()
                     ->removeElement($newTranslation);
@@ -89,7 +90,7 @@ trait TranslatableMethodsTrait
         }
 
         foreach ($this->getTranslations() as $translation) {
-            if (! $translation->isEmpty()) {
+            if (!$translation->isEmpty()) {
                 continue;
             }
 
@@ -119,13 +120,13 @@ trait TranslatableMethodsTrait
 
     public static function getTranslationEntityClass(): string
     {
-        return static::class . 'Translation';
+        return static::class.'Translation';
     }
 
     /**
      * Returns translation for specific locale (creates new one if doesn't exists). If requested translation doesn't
      * exist, it will first try to fallback default locale If any translation doesn't exist, it will be added to
-     * newTranslations collection. In order to persist new translations, call mergeNewTranslations method, before flush
+     * newTranslations collection. In order to persist new translations, call mergeNewTranslations method, before flush.
      *
      * @param string $locale The locale (en, ru, fr) | null If null, will try with current locale
      */
@@ -136,7 +137,7 @@ trait TranslatableMethodsTrait
         }
 
         $foundTranslation = $this->findTranslationByLocale($locale);
-        if ($foundTranslation && ! $foundTranslation->isEmpty()) {
+        if ($foundTranslation && !$foundTranslation->isEmpty()) {
             return $foundTranslation;
         }
 
@@ -172,13 +173,13 @@ trait TranslatableMethodsTrait
     protected function proxyCurrentLocaleTranslation(string $method, array $arguments = [])
     {
         // allow $entity->name call $entity->getName() in templates
-        if (! method_exists(self::getTranslationEntityClass(), $method)) {
-            $method = 'get' . ucfirst($method);
+        if (!method_exists(self::getTranslationEntityClass(), $method)) {
+            $method = 'get'.ucfirst($method);
         }
 
         $translation = $this->translate($this->getCurrentLocale());
 
-        return call_user_func_array([$translation, $method], $arguments);
+        return \call_user_func_array([$translation, $method], $arguments);
     }
 
     /**
@@ -204,7 +205,7 @@ trait TranslatableMethodsTrait
     protected function computeFallbackLocale(string $locale): ?string
     {
         if (strrchr($locale, '_') !== false) {
-            return substr($locale, 0, -strlen(strrchr($locale, '_')));
+            return substr($locale, 0, -\strlen(strrchr($locale, '_')));
         }
 
         return null;
@@ -223,9 +224,7 @@ trait TranslatableMethodsTrait
             return;
         }
 
-        throw new TranslatableException(
-            sprintf('$translations parameter must be iterable or %s', Collection::class)
-        );
+        throw new TranslatableException(\sprintf('$translations parameter must be iterable or %s', Collection::class));
     }
 
     private function resolveFallbackTranslation(string $locale): ?TranslationInterface
@@ -234,7 +233,7 @@ trait TranslatableMethodsTrait
 
         if ($fallbackLocale !== null) {
             $translation = $this->findTranslationByLocale($fallbackLocale);
-            if ($translation && ! $translation->isEmpty()) {
+            if ($translation && !$translation->isEmpty()) {
                 return $translation;
             }
         }

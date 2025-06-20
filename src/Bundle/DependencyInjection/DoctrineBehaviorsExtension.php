@@ -16,7 +16,7 @@ final class DoctrineBehaviorsExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $containerBuilder): void
     {
-        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__.'/../../../config'));
         $phpFileLoader->load('services.php');
     }
 }

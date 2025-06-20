@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Timestampable;
 
-use Datetime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Timestampable\TimestampableEntity;
@@ -30,8 +29,8 @@ final class TimestampableTest extends AbstractBehaviorTestCase
         $this->entityManager->persist($timestampableEntity);
         $this->entityManager->flush();
 
-        $this->assertInstanceOf(Datetime::class, $timestampableEntity->getCreatedAt());
-        $this->assertInstanceOf(Datetime::class, $timestampableEntity->getUpdatedAt());
+        $this->assertInstanceOf(\Datetime::class, $timestampableEntity->getCreatedAt());
+        $this->assertInstanceOf(\Datetime::class, $timestampableEntity->getUpdatedAt());
 
         $this->assertSame(
             $timestampableEntity->getCreatedAt(),

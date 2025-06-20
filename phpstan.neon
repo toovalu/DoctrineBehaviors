@@ -8,7 +8,6 @@ parameters:
         - utils/phpstan-behaviors/src
 
     level: 8
-    checkGenericClassInNonGenericObjectType: false
 
     # to allow installing with various phsptan versions without reporting old errors here
     reportUnmatchedIgnoredErrors: false

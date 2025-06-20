@@ -25,9 +25,6 @@ class TranslatableCustomizedEntity implements TranslatableInterface
     #[GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    /**
-     * @return mixed
-     */
     public function __call(string $method, array $arguments)
     {
         return $this->proxyCurrentLocaleTranslation($method, $arguments);

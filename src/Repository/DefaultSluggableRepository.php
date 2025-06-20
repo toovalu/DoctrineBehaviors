@@ -32,14 +32,14 @@ final class DefaultSluggableRepository
                 continue;
             }
 
-            $normalizedField = \str_replace('.', '_', $field);
+            $normalizedField = str_replace('.', '_', $field);
 
             $queryBuilder
                 ->andWhere(\sprintf('e.%s != :%s', $field, $normalizedField))
                 ->setParameter($normalizedField, $value);
         }
 
-        return ! (bool) $queryBuilder->getQuery()
+        return !(bool) $queryBuilder->getQuery()
             ->getSingleScalarResult();
     }
 }

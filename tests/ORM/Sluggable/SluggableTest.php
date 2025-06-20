@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Sluggable;
 
-use DateTime;
 use Doctrine\Persistence\ObjectRepository;
-use Iterator;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableEntity;
 
@@ -55,7 +53,7 @@ final class SluggableTest extends AbstractBehaviorTestCase
         $this->entityManager->persist($sluggableEntity);
         $this->entityManager->flush();
 
-        $sluggableEntity->setDate(new DateTime());
+        $sluggableEntity->setDate(new \DateTime());
 
         $this->entityManager->persist($sluggableEntity);
         $this->entityManager->flush();
@@ -63,7 +61,7 @@ final class SluggableTest extends AbstractBehaviorTestCase
         $this->assertSame($expectedSlug, $sluggableEntity->getSlug());
     }
 
-    public function provideDataForTest(): Iterator
+    public function provideDataForTest(): \Iterator
     {
         yield ['The name', 'the-name'];
         yield ['Löic & René', 'loic-rene'];

@@ -10,7 +10,6 @@ use Knp\DoctrineBehaviors\PHPStan\Exception\PHPStanTypeException;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
-use ReflectionClass;
 
 final class StaticTranslationTypeHelper
 {
@@ -23,9 +22,9 @@ final class StaticTranslationTypeHelper
         /** @var class-string $translatableClass */
         $translatableClass = $type->getReferencedClasses()[0];
 
-        if (! $reflectionProvider->hasClass($translatableClass)) {
+        if (!$reflectionProvider->hasClass($translatableClass)) {
             // for some reason, we the reflectin provided cannot locate the class
-            $reflectionClass = new ReflectionClass($translatableClass);
+            $reflectionClass = new \ReflectionClass($translatableClass);
         } else {
             $reflectionClass = $reflectionProvider->getClass($translatableClass)
                 ->getNativeReflection();
@@ -38,10 +37,11 @@ final class StaticTranslationTypeHelper
                 return TranslationInterface::class;
             }
 
-            $errorMessage = sprintf(
+            $errorMessage = \sprintf(
                 'Unable to find the Translation class associated to the Translatable class "%s".',
                 $reflectionClass->getName()
             );
+
             throw new PHPStanTypeException($errorMessage);
         }
 
@@ -67,10 +67,11 @@ final class StaticTranslationTypeHelper
                 return TranslatableInterface::class;
             }
 
-            $errorMessage = sprintf(
+            $errorMessage = \sprintf(
                 'Unable to find the Translatable class associated to the Translation class "%s".',
                 $nativeReflection->getName()
             );
+
             throw new PHPStanTypeException($errorMessage);
         }
 
