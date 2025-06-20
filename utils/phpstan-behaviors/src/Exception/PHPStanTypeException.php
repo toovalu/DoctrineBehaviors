@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\PHPStan\Exception;
 
-final class PHPStanTypeException extends \Exception
+use Exception;
+
+final class PHPStanTypeException extends Exception
 {
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
+use ReflectionClass;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
@@ -40,7 +41,7 @@ final class TranslatableEventSubscriber implements EventSubscriberInterface
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
         $classMetadata = $loadClassMetadataEventArgs->getClassMetadata();
-        if (!$classMetadata->reflClass instanceof \ReflectionClass) {
+        if (!$classMetadata->reflClass instanceof ReflectionClass) {
             // Class has not yet been fully built, ignore this event
             return;
         }

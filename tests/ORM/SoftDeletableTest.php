@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM;
 
+use DateTime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\SoftDeletable\SoftDeletableEntity;
@@ -53,7 +54,7 @@ final class SoftDeletableTest extends AbstractBehaviorTestCase
 
         $this->assertNotNull($id = $entity->getId());
 
-        $entity->setDeletedAt((new \DateTime())->modify('+1 day'));
+        $entity->setDeletedAt((new DateTime())->modify('+1 day'));
 
         $this->entityManager->flush();
         $this->entityManager->clear();
@@ -64,10 +65,10 @@ final class SoftDeletableTest extends AbstractBehaviorTestCase
         $this->assertNotNull($entity);
         $this->assertFalse($entity->isDeleted());
         $this->assertTrue($entity->willBeDeleted());
-        $this->assertTrue($entity->willBeDeleted((new \DateTime())->modify('+2 day')));
-        $this->assertFalse($entity->willBeDeleted((new \DateTime())->modify('+12 hour')));
+        $this->assertTrue($entity->willBeDeleted((new DateTime())->modify('+2 day')));
+        $this->assertFalse($entity->willBeDeleted((new DateTime())->modify('+12 hour')));
 
-        $entity->setDeletedAt((new \DateTime())->modify('-1 day'));
+        $entity->setDeletedAt((new DateTime())->modify('-1 day'));
 
         $this->entityManager->flush();
         $this->entityManager->clear();

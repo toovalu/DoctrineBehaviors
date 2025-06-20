@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\Fixtures\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -31,7 +32,7 @@ class LoggableEntity implements LoggableInterface
     private ?array $roles = null;
 
     #[Column(type: 'date', nullable: true)]
-    private ?\DateTimeInterface $dateTime = null;
+    private ?DateTimeInterface $dateTime = null;
 
     public function getId(): int
     {
@@ -58,12 +59,12 @@ class LoggableEntity implements LoggableInterface
         $this->roles = $roles;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->dateTime;
     }
 
-    public function setDate(\DateTimeInterface $dateTime): void
+    public function setDate(DateTimeInterface $dateTime): void
     {
         $this->dateTime = $dateTime;
     }

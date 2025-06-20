@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\PHPStan\Type;
 
+use ReflectionClass;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\PHPStan\Exception\PHPStanTypeException;
@@ -24,7 +25,7 @@ final class StaticTranslationTypeHelper
 
         if (!$reflectionProvider->hasClass($translatableClass)) {
             // for some reason, we the reflectin provided cannot locate the class
-            $reflectionClass = new \ReflectionClass($translatableClass);
+            $reflectionClass = new ReflectionClass($translatableClass);
         } else {
             $reflectionClass = $reflectionProvider->getClass($translatableClass)
                 ->getNativeReflection();

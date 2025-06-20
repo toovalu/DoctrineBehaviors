@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Contract\Entity;
 
+use DateTimeInterface;
+
 interface SoftDeletableInterface
 {
     public function delete(): void;
@@ -15,9 +17,9 @@ interface SoftDeletableInterface
     /**
      * Checks whether the entity will be deleted.
      */
-    public function willBeDeleted(?\DateTimeInterface $deletedAt = null): bool;
+    public function willBeDeleted(?DateTimeInterface $deletedAt = null): bool;
 
-    public function getDeletedAt(): ?\DateTimeInterface;
+    public function getDeletedAt(): ?DateTimeInterface;
 
-    public function setDeletedAt(\DateTimeInterface $deletedAt): void;
+    public function setDeletedAt(DateTimeInterface $deletedAt): void;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Sluggable;
 
+use DateTime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableMultiEntity;
@@ -49,7 +50,7 @@ final class SluggableMultiTest extends AbstractBehaviorTestCase
         $this->entityManager->persist($sluggableMultiEntity);
         $this->entityManager->flush();
 
-        $sluggableMultiEntity->setDate(new \DateTime());
+        $sluggableMultiEntity->setDate(new DateTime());
 
         $this->entityManager->persist($sluggableMultiEntity);
         $this->entityManager->flush();

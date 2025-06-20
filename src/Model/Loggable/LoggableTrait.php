@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Model\Loggable;
 
+use DateTime;
+
 trait LoggableTrait
 {
     public function getUpdateLogMessage(array $changeSets = []): string
@@ -15,7 +17,7 @@ trait LoggableTrait
             for ($i = 0, $s = $itemCount; $i < $s; ++$i) {
                 $item = $changeSet[$i];
 
-                if ($item instanceof \DateTime) {
+                if ($item instanceof DateTime) {
                     $changeSet[$i] = $item->format('Y-m-d H:i:s.u');
                 }
             }

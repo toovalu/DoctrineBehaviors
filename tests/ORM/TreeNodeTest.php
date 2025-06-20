@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM;
 
+use Iterator;
 use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
 use Knp\DoctrineBehaviors\Exception\TreeException;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
@@ -100,7 +101,7 @@ final class TreeNodeTest extends AbstractBehaviorTestCase
         );
     }
 
-    public function provideRootPaths(): \Iterator
+    public function provideRootPaths(): Iterator
     {
         yield [$treeNodeEntity = new TreeNodeEntity(), '/0'];
         $treeNodeEntity->setMaterializedPath('/0/1');
@@ -122,7 +123,7 @@ final class TreeNodeTest extends AbstractBehaviorTestCase
         $this->assertSame($expected, $child->isChildNodeOf($parent));
     }
 
-    public function provideIsChildNodeOf(): \Iterator
+    public function provideIsChildNodeOf(): Iterator
     {
         $treeNodeEntity = $this->buildTree();
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable;
 
+use DateTimeInterface;
+use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -26,11 +28,11 @@ class SluggableEntity implements SluggableInterface
     private int $id;
 
     #[Column(type: 'datetime')]
-    private \DateTimeInterface|\DateTime $dateTime;
+    private DateTimeInterface|DateTime $dateTime;
 
     public function __construct()
     {
-        $this->dateTime = (new \DateTime())->modify('-1 year');
+        $this->dateTime = (new DateTime())->modify('-1 year');
     }
 
     public function getId(): int
@@ -52,12 +54,12 @@ class SluggableEntity implements SluggableInterface
         $this->name = $name;
     }
 
-    public function getDate(): \DateTimeInterface
+    public function getDate(): DateTimeInterface
     {
         return $this->dateTime;
     }
 
-    public function setDate(\DateTimeInterface $dateTime): void
+    public function setDate(DateTimeInterface $dateTime): void
     {
         $this->dateTime = $dateTime;
     }

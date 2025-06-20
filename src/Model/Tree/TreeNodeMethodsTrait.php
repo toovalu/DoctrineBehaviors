@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Model\Tree;
 
+use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
@@ -181,9 +182,9 @@ trait TreeNodeMethodsTrait
     }
 
     /**
-     * @param \Closure $prepare a function to prepare the node before putting into the result
+     * @param Closure $prepare a function to prepare the node before putting into the result
      */
-    public function toJson(?\Closure $prepare = null): string
+    public function toJson(?Closure $prepare = null): string
     {
         $tree = $this->toArray($prepare);
 
@@ -191,11 +192,11 @@ trait TreeNodeMethodsTrait
     }
 
     /**
-     * @param \Closure $prepare a function to prepare the node before putting into the result
+     * @param Closure $prepare a function to prepare the node before putting into the result
      */
-    public function toArray(?\Closure $prepare = null, ?array &$tree = null): array
+    public function toArray(?Closure $prepare = null, ?array &$tree = null): array
     {
-        if (!$prepare instanceof \Closure) {
+        if (!$prepare instanceof Closure) {
             $prepare = static fn (TreeNodeInterface $treeNode): string => (string) $treeNode;
         }
 
@@ -222,12 +223,12 @@ trait TreeNodeMethodsTrait
     }
 
     /**
-     * @param \Closure $prepare a function to prepare the node before putting into the result
+     * @param Closure $prepare a function to prepare the node before putting into the result
      * @param array $tree a reference to an array, used internally for recursion
      */
-    public function toFlatArray(?\Closure $prepare = null, ?array &$tree = null): array
+    public function toFlatArray(?Closure $prepare = null, ?array &$tree = null): array
     {
-        if (!$prepare instanceof \Closure) {
+        if (!$prepare instanceof Closure) {
             $prepare = static function (TreeNodeInterface $treeNode) {
                 $pre = $treeNode->getNodeLevel() > 1 ? implode('', array_fill(0, $treeNode->getNodeLevel(), '--')) : '';
 
