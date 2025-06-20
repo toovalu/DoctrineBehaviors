@@ -29,8 +29,8 @@ final class TimestampableTest extends AbstractBehaviorTestCase
         $this->entityManager->persist($timestampableEntity);
         $this->entityManager->flush();
 
-        $this->assertInstanceOf(\Datetime::class, $timestampableEntity->getCreatedAt());
-        $this->assertInstanceOf(\Datetime::class, $timestampableEntity->getUpdatedAt());
+        $this->assertInstanceOf(\DateTime::class, $timestampableEntity->getCreatedAt());
+        $this->assertInstanceOf(\DateTime::class, $timestampableEntity->getUpdatedAt());
 
         $this->assertSame(
             $timestampableEntity->getCreatedAt(),
