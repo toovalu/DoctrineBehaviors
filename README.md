@@ -13,7 +13,6 @@ It currently handles:
  * [Uuidable](/docs/uuidable.md)
  * [Timestampable](/docs/timestampable.md)
  * [Translatable](/docs/translatable.md)
- * [Tree](/docs/tree.md)
 
 ## Install
 

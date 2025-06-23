@@ -3,7 +3,7 @@
     "description": "Doctrine Behavior Traits",
     "type": "symfony-bundle",
     "keywords": [
-        "behaviors", "doctrine", "timestampable", "translatable", "blameable", "softdeletable", "tree", "uuid"
+        "behaviors", "doctrine", "timestampable", "translatable", "blameable", "softdeletable",  "uuid"
     ],
     "homepage": "http://www.toovalu.com",
     "license": "MIT",
