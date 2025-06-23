@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests\Fixtures\Entity;
 
 use ArrayAccess;
-use Stringable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -13,6 +12,7 @@ use Doctrine\ORM\Mapping\Id;
 use Knp\DoctrineBehaviors\Contract\Entity\TreeNodeInterface;
 use Knp\DoctrineBehaviors\Model\Tree\TreeNodeTrait;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Repository\TreeNodeRepository;
+use Stringable;
 
 #[Entity(repositoryClass: TreeNodeRepository::class)]
 class TreeNodeEntity implements TreeNodeInterface, ArrayAccess, Stringable

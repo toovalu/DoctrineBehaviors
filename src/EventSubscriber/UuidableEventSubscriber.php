@@ -20,7 +20,7 @@ final class UuidableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!is_a($classMetadata->reflClass->getName(), UuidableInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), UuidableInterface::class, true)) {
             return;
         }
 

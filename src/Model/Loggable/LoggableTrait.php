@@ -29,7 +29,7 @@ trait LoggableTrait
             $message[] = $this->createChangeSetMessage($property, $changeSet);
         }
 
-        return implode("\n", $message);
+        return \implode("\n", $message);
     }
 
     public function getCreateLogMessage(): string

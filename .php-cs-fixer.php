@@ -11,30 +11,30 @@ $finder = (new PhpCsFixer\Finder())
     ]);
 
 return (new PhpCsFixer\Config())
-    ->setRiskyAllowed(true)
+    ->setRiskyAllowed(false)
     ->setRules([
-        '@Symfony' => true,
-        '@PHP83Migration' => true,
-        'backtick_to_shell_exec' => true,
-        'declare_strict_types' => true,
-        'increment_style' => ['style' => 'pre'],
-        'native_function_invocation' => true,
-        'array_indentation' => true,
-        'self_static_accessor' => true,
-        'blank_line_before_statement' => true,
-        'no_extra_blank_lines' => [
-            'tokens' => [
-                'break',
-                'continue',
-                'extra',
-                'return',
-                'throw',
-                'use',
-                'parenthesis_brace_block',
-                'square_brace_block',
-                'curly_brace_block',
-            ],
-        ],
+        // '@Symfony' => true,
+        // '@PHP83Migration' => true,
+        // 'backtick_to_shell_exec' => true,
+        // 'declare_strict_types' => true,
+        // 'increment_style' => ['style' => 'pre'],
+        // 'native_function_invocation' => false,
+        // 'array_indentation' => true,
+        // 'self_static_accessor' => true,
+        // 'blank_line_before_statement' => true,
+        // 'no_extra_blank_lines' => [
+        //     'tokens' => [
+        //         'break',
+        //         'continue',
+        //         'extra',
+        //         'return',
+        //         'throw',
+        //         'use',
+        //         'parenthesis_brace_block',
+        //         'square_brace_block',
+        //         'curly_brace_block',
+        //     ],
+        // ],
         'no_null_property_initialization' => false,
         'no_superfluous_phpdoc_tags' => true,
         'no_unused_imports' => true,

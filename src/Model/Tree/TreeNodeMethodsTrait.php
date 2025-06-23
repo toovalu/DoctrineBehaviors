@@ -50,9 +50,9 @@ trait TreeNodeMethodsTrait
     public function getParentMaterializedPath(): string
     {
         $path = $this->getExplodedPath();
-        array_pop($path);
+        \array_pop($path);
 
-        return static::getMaterializedPathSeparator().implode(static::getMaterializedPathSeparator(), $path);
+        return static::getMaterializedPathSeparator().\implode(static::getMaterializedPathSeparator(), $path);
     }
 
     public function setParentMaterializedPath(string $path): void
@@ -64,7 +64,7 @@ trait TreeNodeMethodsTrait
     {
         $explodedPath = $this->getExplodedPath();
 
-        return static::getMaterializedPathSeparator().array_shift($explodedPath);
+        return static::getMaterializedPathSeparator().\array_shift($explodedPath);
     }
 
     public function getNodeLevel(): int
@@ -105,7 +105,7 @@ trait TreeNodeMethodsTrait
     public function isIndirectChildNodeOf(TreeNodeInterface $treeNode): bool
     {
         return $this->getRealMaterializedPath() !== $treeNode->getRealMaterializedPath()
-            && str_starts_with($this->getRealMaterializedPath(), $treeNode->getRealMaterializedPath());
+            && \str_starts_with($this->getRealMaterializedPath(), $treeNode->getRealMaterializedPath());
     }
 
     public function isChildNodeOf(TreeNodeInterface $treeNode): bool
@@ -121,7 +121,7 @@ trait TreeNodeMethodsTrait
         }
 
         $path = $treeNode instanceof TreeNodeInterface
-            ? rtrim($treeNode->getRealMaterializedPath(), static::getMaterializedPathSeparator())
+            ? \rtrim($treeNode->getRealMaterializedPath(), static::getMaterializedPathSeparator())
             : static::getMaterializedPathSeparator();
         $this->setMaterializedPath($path);
 
@@ -230,7 +230,7 @@ trait TreeNodeMethodsTrait
     {
         if (!$prepare instanceof Closure) {
             $prepare = static function (TreeNodeInterface $treeNode) {
-                $pre = $treeNode->getNodeLevel() > 1 ? implode('', array_fill(0, $treeNode->getNodeLevel(), '--')) : '';
+                $pre = $treeNode->getNodeLevel() > 1 ? \implode('', \array_fill(0, $treeNode->getNodeLevel(), '--')) : '';
 
                 return $pre.$treeNode;
             };
@@ -284,8 +284,8 @@ trait TreeNodeMethodsTrait
             throw new ShouldNotHappenException();
         }
 
-        $path = explode($separator, $this->getRealMaterializedPath());
+        $path = \explode($separator, $this->getRealMaterializedPath());
 
-        return array_filter($path, static fn ($item): bool => $item !== '');
+        return \array_filter($path, static fn ($item): bool => $item !== '');
     }
 }

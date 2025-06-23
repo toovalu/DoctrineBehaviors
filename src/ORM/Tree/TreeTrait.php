@@ -77,7 +77,7 @@ trait TreeTrait
             ->addOrderBy($rootAlias.'.materializedPath', 'ASC')
             ->setParameter('path', $path.'%');
 
-        $parentId = basename($path);
+        $parentId = \basename($path);
         if ($parentId !== '' && $parentId !== '0') {
             $queryBuilder->orWhere($rootAlias.'.id = :parent')
                 ->setParameter('parent', $parentId);

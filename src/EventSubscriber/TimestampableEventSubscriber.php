@@ -24,7 +24,7 @@ final class TimestampableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!is_a($classMetadata->reflClass->getName(), TimestampableInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), TimestampableInterface::class, true)) {
             return;
         }
 

@@ -47,7 +47,7 @@ final class SoftDeletableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!is_a($classMetadata->reflClass->getName(), SoftDeletableInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), SoftDeletableInterface::class, true)) {
             return;
         }
 

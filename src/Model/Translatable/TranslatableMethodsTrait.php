@@ -173,8 +173,8 @@ trait TranslatableMethodsTrait
     protected function proxyCurrentLocaleTranslation(string $method, array $arguments = [])
     {
         // allow $entity->name call $entity->getName() in templates
-        if (!method_exists(self::getTranslationEntityClass(), $method)) {
-            $method = 'get'.ucfirst($method);
+        if (!\method_exists(self::getTranslationEntityClass(), $method)) {
+            $method = 'get'.\ucfirst($method);
         }
 
         $translation = $this->translate($this->getCurrentLocale());
@@ -204,8 +204,8 @@ trait TranslatableMethodsTrait
 
     protected function computeFallbackLocale(string $locale): ?string
     {
-        if (strrchr($locale, '_') !== false) {
-            return substr($locale, 0, -\strlen(strrchr($locale, '_')));
+        if (\strrchr($locale, '_') !== false) {
+            return \substr($locale, 0, -\strlen(\strrchr($locale, '_')));
         }
 
         return null;
@@ -220,7 +220,7 @@ trait TranslatableMethodsTrait
             return;
         }
 
-        if (is_iterable($translations)) {
+        if (\is_iterable($translations)) {
             return;
         }
 

@@ -60,7 +60,7 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
 
     private function shouldSkip(ClassMetadataInfo $classMetadataInfo): bool
     {
-        if (!is_a($classMetadataInfo->getName(), SluggableInterface::class, true)) {
+        if (!\is_a($classMetadataInfo->getName(), SluggableInterface::class, true)) {
             return true;
         }
 

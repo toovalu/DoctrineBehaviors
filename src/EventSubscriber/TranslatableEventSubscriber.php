@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use ReflectionClass;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
@@ -14,6 +13,7 @@ use Doctrine\Persistence\ObjectManager;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
+use ReflectionClass;
 
 final class TranslatableEventSubscriber implements EventSubscriberInterface
 {
@@ -50,11 +50,11 @@ final class TranslatableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (is_a($classMetadata->reflClass->getName(), TranslatableInterface::class, true)) {
+        if (\is_a($classMetadata->reflClass->getName(), TranslatableInterface::class, true)) {
             $this->mapTranslatable($classMetadata);
         }
 
-        if (is_a($classMetadata->reflClass->getName(), TranslationInterface::class, true)) {
+        if (\is_a($classMetadata->reflClass->getName(), TranslationInterface::class, true)) {
             $this->mapTranslation($classMetadata, $loadClassMetadataEventArgs->getObjectManager());
         }
     }

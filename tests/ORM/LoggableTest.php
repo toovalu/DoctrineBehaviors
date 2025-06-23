@@ -65,7 +65,7 @@ final class LoggableTest extends AbstractBehaviorTestCase
         $expectedRecordCount = $this->isPostgreSql() ? 3 : 2;
         $this->assertCount($expectedRecordCount, $this->testLogger->records);
 
-        $lastRecord = array_pop($this->testLogger->records);
+        $lastRecord = \array_pop($this->testLogger->records);
 
         $expectedMessage = \sprintf(
             '%s #1 : property "%s" changed from "" to "%s"',
@@ -113,7 +113,7 @@ final class LoggableTest extends AbstractBehaviorTestCase
         $expectedRecordCount = $this->isPostgreSql() ? 3 : 2;
         $this->assertCount($expectedRecordCount, $this->testLogger->records);
 
-        $lastRecord = array_pop($this->testLogger->records);
+        $lastRecord = \array_pop($this->testLogger->records);
 
         $expectedMessage = \sprintf('%s #1 removed', LoggableEntity::class);
         $this->assertSame($expectedMessage, $lastRecord['message']);

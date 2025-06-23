@@ -43,12 +43,12 @@ trait TranslationMethodsTrait
 
     public function isEmpty(): bool
     {
-        foreach (get_object_vars($this) as $var => $value) {
+        foreach (\get_object_vars($this) as $var => $value) {
             if (\in_array($var, ['id', 'translatable', 'locale'], true)) {
                 continue;
             }
 
-            if (\is_string($value) && \strlen(trim($value)) > 0) {
+            if (\is_string($value) && \strlen(\trim($value)) > 0) {
                 return false;
             }
 

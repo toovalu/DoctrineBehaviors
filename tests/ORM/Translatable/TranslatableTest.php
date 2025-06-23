@@ -244,8 +244,8 @@ final class TranslatableTest extends AbstractBehaviorTestCase
 
         $this->assertSame('fabuleux3', $translatableEntity->translate('fr')->getTitle());
 
-        $givenObjectHash = spl_object_hash($translatableEntity->translate('fr'));
-        $translationObjectHash = spl_object_hash($translatableEntityTranslation);
+        $givenObjectHash = \spl_object_hash($translatableEntity->translate('fr'));
+        $translationObjectHash = \spl_object_hash($translatableEntityTranslation);
         $this->assertSame($givenObjectHash, $translationObjectHash);
     }
 

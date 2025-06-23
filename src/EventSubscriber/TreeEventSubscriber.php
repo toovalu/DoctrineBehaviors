@@ -19,7 +19,7 @@ final class TreeEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!is_a($classMetadata->reflClass->getName(), TreeNodeInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), TreeNodeInterface::class, true)) {
             return;
         }
 

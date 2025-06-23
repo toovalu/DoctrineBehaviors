@@ -49,7 +49,7 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!is_a($classMetadata->reflClass->getName(), BlameableInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), BlameableInterface::class, true)) {
             return;
         }
 
@@ -141,7 +141,7 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
 
     private function mapEntity(ClassMetadataInfo $classMetadataInfo): void
     {
-        if ($this->blameableUserEntity !== null && class_exists($this->blameableUserEntity)) {
+        if ($this->blameableUserEntity !== null && \class_exists($this->blameableUserEntity)) {
             $this->mapManyToOneUser($classMetadataInfo);
         } else {
             $this->mapStringUser($classMetadataInfo);

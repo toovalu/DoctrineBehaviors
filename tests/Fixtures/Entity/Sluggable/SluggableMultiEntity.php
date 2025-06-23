@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable;
 
-use DateTimeInterface;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -82,9 +82,9 @@ class SluggableMultiEntity implements SluggableInterface
      */
     public function generateSlugValue(array $values)
     {
-        $sluggableText = implode(' ', $values);
-        $sluggableText = str_replace(' ', '+', $sluggableText);
+        $sluggableText = \implode(' ', $values);
+        $sluggableText = \str_replace(' ', '+', $sluggableText);
 
-        return strtolower($sluggableText);
+        return \strtolower($sluggableText);
     }
 }

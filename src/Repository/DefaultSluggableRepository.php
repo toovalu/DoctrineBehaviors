@@ -28,11 +28,15 @@ final class DefaultSluggableRepository
             ->getIdentifierValues($sluggable);
 
         foreach ($identifiers as $field => $value) {
-            if ($value === null || $field === 'slug') {
+            if ($value === null) {
                 continue;
             }
 
-            $normalizedField = str_replace('.', '_', $field);
+            if ($field === 'slug') {
+                continue;
+            }
+
+            $normalizedField = \str_replace('.', '_', $field);
 
             $queryBuilder
                 ->andWhere(\sprintf('e.%s != :%s', $field, $normalizedField))

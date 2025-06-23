@@ -32,12 +32,12 @@ final class DoctrineBehaviorsKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir().'/doctrine_behaviors_test';
+        return \sys_get_temp_dir().'/doctrine_behaviors_test';
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir().'/doctrine_behaviors_test_log';
+        return \sys_get_temp_dir().'/doctrine_behaviors_test_log';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void

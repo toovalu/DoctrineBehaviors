@@ -53,7 +53,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
         $this->entityManager->clear();
 
         // wait for a second:
-        sleep(1);
+        \sleep(1);
 
         /** @var TimestampableEntity $entity */
         $entity = $this->timestampableRepository->find($id);
@@ -90,7 +90,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
 
         $this->entityManager->clear();
 
-        sleep(1);
+        \sleep(1);
 
         /** @var TimestampableEntity $entity */
         $entity = $this->timestampableRepository->find($id);
@@ -116,7 +116,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
 
         $this->entityManager->clear();
 
-        sleep(1);
+        \sleep(1);
 
         /** @var TimestampableEntity $entity */
         $entity = $this->timestampableRepository->find($id);
@@ -127,7 +127,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
 
         $updatedAt = $entity->getUpdatedAt();
 
-        sleep(1);
+        \sleep(1);
 
         $this->entityManager->flush();
 
