@@ -22,7 +22,7 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private DefaultSluggableRepository $defaultSluggableRepository
+        private DefaultSluggableRepository $defaultSluggableRepository,
     ) {
     }
 

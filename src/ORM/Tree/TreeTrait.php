@@ -41,7 +41,7 @@ trait TreeTrait
 
     public function getTreeExceptNodeAndItsChildrenQB(
         TreeNodeInterface $treeNode,
-        string $rootAlias = 't'
+        string $rootAlias = 't',
     ): QueryBuilder {
         return $this->getFlatTreeQB('', $rootAlias)
             ->andWhere($rootAlias.'.materializedPath NOT LIKE :except_path')

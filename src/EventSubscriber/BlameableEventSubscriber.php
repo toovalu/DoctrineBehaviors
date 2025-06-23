@@ -34,7 +34,7 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private UserProviderInterface $userProvider,
         private EntityManagerInterface $entityManager,
-        private ?string $blameableUserEntity = null
+        private ?string $blameableUserEntity = null,
     ) {
     }
 

@@ -20,7 +20,7 @@ use PHPStan\Type\TypeCombinator;
 final class TranslatableGetTranslationsDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function __construct(
-        private ReflectionProvider $reflectionProvider
+        private ReflectionProvider $reflectionProvider,
     ) {
     }
 
@@ -37,7 +37,7 @@ final class TranslatableGetTranslationsDynamicMethodReturnTypeExtension implemen
     public function getTypeFromMethodCall(
         MethodReflection $methodReflection,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): Type {
         $translationClass = StaticTranslationTypeHelper::getTranslationClass(
             $this->reflectionProvider,

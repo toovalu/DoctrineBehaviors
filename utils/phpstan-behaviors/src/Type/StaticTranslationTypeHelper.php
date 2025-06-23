@@ -17,7 +17,7 @@ final class StaticTranslationTypeHelper
     public static function getTranslationClass(
         ReflectionProvider $reflectionProvider,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): string {
         $type = $scope->getType($methodCall->var);
         /** @var class-string $translatableClass */
@@ -54,7 +54,7 @@ final class StaticTranslationTypeHelper
     public static function getTranslatableClass(
         ReflectionProvider $reflectionProvider,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): string {
         $type = $scope->getType($methodCall->var);
         $translationClass = $type->getReferencedClasses()[0];

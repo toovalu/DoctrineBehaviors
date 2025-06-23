@@ -29,7 +29,7 @@ final class TranslatableEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private LocaleProviderInterface $localeProvider,
         string $translatableFetchMode,
-        string $translationFetchMode
+        string $translationFetchMode,
     ) {
         $this->translatableFetchMode = $this->convertFetchString($translatableFetchMode);
         $this->translationFetchMode = $this->convertFetchString($translationFetchMode);

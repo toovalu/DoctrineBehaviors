@@ -17,7 +17,7 @@ final class DoctrineBehaviorsKernel extends Kernel
      * @param string[] $configs
      */
     public function __construct(
-        private array $configs = []
+        private array $configs = [],
     ) {
         parent::__construct('test', false);
     }

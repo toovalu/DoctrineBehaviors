@@ -21,7 +21,7 @@ final class EntityUserProvider implements UserProviderInterface
     private UserEntity $userEntity;
 
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {
     }
 

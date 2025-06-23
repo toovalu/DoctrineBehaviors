@@ -14,7 +14,7 @@ use Psr\Log\LogLevel;
 final class LoggableEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
     }
 

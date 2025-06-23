@@ -12,7 +12,7 @@ use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 final class TimestampableEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private string $timestampableDateFieldType
+        private string $timestampableDateFieldType,
     ) {
     }
 

@@ -12,7 +12,7 @@ final class UserProvider implements UserProviderInterface
 {
     public function __construct(
         private Security $security,
-        private ?string $blameableUserEntity = null
+        private ?string $blameableUserEntity = null,
     ) {
     }
 
