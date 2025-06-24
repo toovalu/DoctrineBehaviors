@@ -17,13 +17,13 @@ final class StaticTranslationTypeHelper
     public static function getTranslationClass(
         ReflectionProvider $reflectionProvider,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): string {
         $type = $scope->getType($methodCall->var);
         /** @var class-string $translatableClass */
         $translatableClass = $type->getReferencedClasses()[0];
 
-        if (! $reflectionProvider->hasClass($translatableClass)) {
+        if (!$reflectionProvider->hasClass($translatableClass)) {
             // for some reason, we the reflectin provided cannot locate the class
             $reflectionClass = new ReflectionClass($translatableClass);
         } else {
@@ -38,10 +38,11 @@ final class StaticTranslationTypeHelper
                 return TranslationInterface::class;
             }
 
-            $errorMessage = sprintf(
+            $errorMessage = \sprintf(
                 'Unable to find the Translation class associated to the Translatable class "%s".',
                 $reflectionClass->getName()
             );
+
             throw new PHPStanTypeException($errorMessage);
         }
 
@@ -53,7 +54,7 @@ final class StaticTranslationTypeHelper
     public static function getTranslatableClass(
         ReflectionProvider $reflectionProvider,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): string {
         $type = $scope->getType($methodCall->var);
         $translationClass = $type->getReferencedClasses()[0];
@@ -67,10 +68,11 @@ final class StaticTranslationTypeHelper
                 return TranslatableInterface::class;
             }
 
-            $errorMessage = sprintf(
+            $errorMessage = \sprintf(
                 'Unable to find the Translatable class associated to the Translation class "%s".',
                 $nativeReflection->getName()
             );
+
             throw new PHPStanTypeException($errorMessage);
         }
 

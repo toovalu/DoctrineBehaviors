@@ -11,6 +11,7 @@ use Knp\DoctrineBehaviors\Tests\Provider\TestUserProvider;
 use Psr\Log\Test\TestLogger;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\Security;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {

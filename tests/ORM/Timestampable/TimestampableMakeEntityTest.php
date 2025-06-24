@@ -11,7 +11,7 @@ use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\ORM\Timestampable\Source\SomeClassForMetadata;
 
 /**
- * When console make:entity creates a new class, the event arguments are not fully populated
+ * When console make:entity creates a new class, the event arguments are not fully populated.
  *
  * This test emulates the event dispatch near the end of method
  * Doctrine\ORM\Mapping\ClassMetadataFactory::doLoadMetadata()

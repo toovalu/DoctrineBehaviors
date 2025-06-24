@@ -20,7 +20,7 @@ final class UuidableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (! is_a($classMetadata->reflClass->getName(), UuidableInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), UuidableInterface::class, true)) {
             return;
         }
 
@@ -38,7 +38,7 @@ final class UuidableEventSubscriber implements EventSubscriberInterface
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof UuidableInterface) {
+        if (!$entity instanceof UuidableInterface) {
             return;
         }
 

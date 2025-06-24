@@ -10,7 +10,7 @@ use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 final class DefaultSluggableRepository
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -28,7 +28,11 @@ final class DefaultSluggableRepository
             ->getIdentifierValues($sluggable);
 
         foreach ($identifiers as $field => $value) {
-            if ($value === null || $field === 'slug') {
+            if ($value === null) {
+                continue;
+            }
+
+            if ($field === 'slug') {
                 continue;
             }
 
@@ -39,7 +43,7 @@ final class DefaultSluggableRepository
                 ->setParameter($normalizedField, $value);
         }
 
-        return ! (bool) $queryBuilder->getQuery()
+        return !(bool) $queryBuilder->getQuery()
             ->getSingleScalarResult();
     }
 }

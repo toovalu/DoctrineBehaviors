@@ -17,14 +17,14 @@ final class LocaleProvider implements LocaleProviderInterface
     public function __construct(
         private RequestStack $requestStack,
         private ParameterBagInterface $parameterBag,
-        private ?TranslatorInterface $translator
+        private ?TranslatorInterface $translator,
     ) {
     }
 
     public function provideCurrentLocale(): ?string
     {
         $currentRequest = $this->requestStack->getCurrentRequest();
-        if (! $currentRequest instanceof Request) {
+        if (!$currentRequest instanceof Request) {
             return null;
         }
 
@@ -33,7 +33,7 @@ final class LocaleProvider implements LocaleProviderInterface
             return $currentLocale;
         }
 
-        if ($this->translator !== null) {
+        if ($this->translator instanceof TranslatorInterface) {
             return $this->translator->getLocale();
         }
 
@@ -43,7 +43,7 @@ final class LocaleProvider implements LocaleProviderInterface
     public function provideFallbackLocale(): ?string
     {
         $currentRequest = $this->requestStack->getCurrentRequest();
-        if ($currentRequest !== null) {
+        if ($currentRequest instanceof Request) {
             return $currentRequest->getDefaultLocale();
         }
 
@@ -53,7 +53,7 @@ final class LocaleProvider implements LocaleProviderInterface
             }
 
             return (string) $this->parameterBag->get('kernel.default_locale');
-        } catch (ParameterNotFoundException | InvalidArgumentException) {
+        } catch (ParameterNotFoundException|InvalidArgumentException) {
             return null;
         }
     }

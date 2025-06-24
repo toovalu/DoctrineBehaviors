@@ -33,7 +33,7 @@ final class TranslatableTranslateDynamicMethodReturnTypeExtension implements Dyn
     public function getTypeFromMethodCall(
         MethodReflection $methodReflection,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): Type {
         $translationClass = StaticTranslationTypeHelper::getTranslationClass(
             $this->reflectionProvider,

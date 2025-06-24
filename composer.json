@@ -1,13 +1,14 @@
 {
-    "name": "knplabs/doctrine-behaviors",
+    "name": "tooalu/doctrine-behaviors",
     "description": "Doctrine Behavior Traits",
     "type": "symfony-bundle",
     "keywords": [
-        "behaviors", "doctrine", "timestampable", "translatable", "blameable", "softdeletable", "tree", "uuid"
+        "behaviors", "doctrine", "timestampable", "translatable", "blameable", "softdeletable",  "uuid"
     ],
-    "homepage": "http://knplabs.com",
+    "homepage": "http://www.toovalu.com",
     "license": "MIT",
     "authors": [
+        { "name": "Toovalu", "homepage": "http://www.toovalu.com" },
         { "name": "Knplabs", "homepage": "http://knplabs.com" }
     ],
     "require": {
@@ -34,17 +35,13 @@
         "psr/log": "^1.1",
         "doctrine/annotations": "^1.13",
         "php-parallel-lint/php-parallel-lint": "^1.3",
-        "phpstan/phpstan": "^1.7.10",
+        "phpstan/phpstan": "^2.1.17",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.13.4",
-        "symplify/easy-coding-standard": "^10.2.9",
-        "symplify/phpstan-extensions": "^10.2.9",
-        "phpstan/phpstan-doctrine": "^1.3",
-        "phpstan/phpstan-phpunit": "^1.1",
-        "symplify/package-builder": "^10.2.9",
-        "symplify/phpstan-rules": "^10.2.9",
-        "phpstan/extension-installer": "^1.1",
-        "symplify/easy-ci": "^10.2.9"
+        "rector/rector": "^2.0.18",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/extension-installer": "^1.4.3",
+        "friendsofphp/php-cs-fixer": "^3.75"
     },
     "autoload": {
         "psr-4": {
@@ -58,9 +55,10 @@
         }
     },
     "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi",
-        "phpstan": "vendor/bin/phpstan analyse --ansi --error-format symplify"
+        "check-cs": "vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php",
+        "fix-cs": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php",
+        "phpstan": "vendor/bin/phpstan analyse --ansi",
+        "rector": "vendor/bin/rector process --ansi"
     },
     "config": {
         "allow-plugins": {

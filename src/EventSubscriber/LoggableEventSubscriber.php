@@ -14,14 +14,14 @@ use Psr\Log\LogLevel;
 final class LoggableEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
     }
 
     public function postPersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof LoggableInterface) {
+        if (!$entity instanceof LoggableInterface) {
             return;
         }
 
@@ -34,7 +34,7 @@ final class LoggableEventSubscriber implements EventSubscriberInterface
     public function postUpdate(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof LoggableInterface) {
+        if (!$entity instanceof LoggableInterface) {
             return;
         }
 
@@ -59,7 +59,7 @@ final class LoggableEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Logs entity changeset
+     * Logs entity changeset.
      */
     private function logChangeSet(LifecycleEventArgs $lifecycleEventArgs): void
     {

@@ -13,10 +13,11 @@ final class DoctrineBehaviorsExtension extends Extension
 {
     /**
      * @param string[] $configs
+     * @param array<array<mixed>> $configs
      */
     public function load(array $configs, ContainerBuilder $containerBuilder): void
     {
-        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__.'/../../../config'));
         $phpFileLoader->load('services.php');
     }
 }

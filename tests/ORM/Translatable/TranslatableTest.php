@@ -244,8 +244,8 @@ final class TranslatableTest extends AbstractBehaviorTestCase
 
         $this->assertSame('fabuleux3', $translatableEntity->translate('fr')->getTitle());
 
-        $givenObjectHash = spl_object_hash($translatableEntity->translate('fr'));
-        $translationObjectHash = spl_object_hash($translatableEntityTranslation);
+        $givenObjectHash = \spl_object_hash($translatableEntity->translate('fr'));
+        $translationObjectHash = \spl_object_hash($translatableEntityTranslation);
         $this->assertSame($givenObjectHash, $translationObjectHash);
     }
 
@@ -397,7 +397,7 @@ final class TranslatableTest extends AbstractBehaviorTestCase
     /**
      * @param class-string $translatableClass
      * @param class-string $translationClass
-     * Asserts that the one to many relationship between translatable and translations is mapped correctly.
+     *                                       Asserts that the one to many relationship between translatable and translations is mapped correctly
      */
     private function assertTranslationsOneToManyMapped(string $translatableClass, string $translationClass): void
     {

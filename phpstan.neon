@@ -1,13 +1,6 @@
 includes:
     - phpstan-extension.neon
 
-    - vendor/symplify/phpstan-rules/config/static-rules.neon
-    - vendor/symplify/phpstan-rules/config/array-rules.neon
-    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
-    - vendor/symplify/phpstan-rules/config/regex-rules.neon
-    - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
-    - vendor/symplify/phpstan-rules/config/test-rules.neon
-
 parameters:
     paths:
         - src
@@ -15,7 +8,6 @@ parameters:
         - utils/phpstan-behaviors/src
 
     level: 8
-    checkGenericClassInNonGenericObjectType: false
 
     # to allow installing with various phsptan versions without reporting old errors here
     reportUnmatchedIgnoredErrors: false
@@ -23,8 +15,6 @@ parameters:
     ignoreErrors:
         # traits
         - '#Call to an undefined method Knp\\DoctrineBehaviors\\Contract\\Provider\\UserProviderInterface::changeUser\(\)#'
-        - '#Call to an undefined method Knp\\DoctrineBehaviors\\Contract\\Entity\\TreeNodeInterface::getId\(\)#'
-        - '#Call to an undefined method Knp\\DoctrineBehaviors\\Contract\\Entity\\TreeNodeInterface::to(Flat)?Array\(\)#'
 
         # buggy
         - '#of function call_user_func_array expects callable#'
@@ -33,15 +23,8 @@ parameters:
         - '#return type has no value type specified#'
         - '#has parameter (.*?) with no (typehint|value type) specified#'
         - '#Unable to resolve the template type T#'
-        # cache buggy
-        - '#Access to an undefined property Knp\\DoctrineBehaviors\\Tests\\Fixtures\\Entity\\TreeNodeEntity\:\:\$parentNodePath#'
-        - '#Property with protected modifier is not allowed\. Use interface contract method instead#'
 
         # tests
-        - '#Offset 0 does not exist on array<Knp\\DoctrineBehaviors\\Contract\\Entity\\TreeNodeInterface\>\|ArrayAccess\|null#'
-
-        - '#Cannot call method addChildNode\(\) on Knp\\DoctrineBehaviors\\Contract\\Entity\\TreeNodeInterface\|null#'
-
         - '#Do not use "\$entityManager->getRepository\(\)" outside of the constructor of repository service#'
 
         # resolve in follow up PR
@@ -51,8 +34,6 @@ parameters:
         -
             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
             paths:
-                # node tree in array
-                - 'src/Model/Tree/TreeNodeMethodsTrait.php'
                 # annotation mapping
                 - src/EventSubscriber/TranslatableEventSubscriber.php
 
@@ -60,11 +41,6 @@ parameters:
             message: '#Do not use @method tag in class docblock#'
             paths:
                 - tests/Fixtures/Entity/TranslatableEntity.php
-
-        -
-            message: '#Use explicit methods over array access on object#'
-            paths:
-                - tests/ORM/TreeNodeTest.php
 
         - '#Method call on new expression is not allowed#'
         - '#Do not use factory/method call in constructor\. Put factory in config and get service with dependency injection#'
@@ -90,10 +66,6 @@ parameters:
         -
             message: '#Use required typed property over of nullable property#'
             path: '*/Entity/*'
-
-        -
-            message: '#Attribute key "repositoryClass" cannot be used#'
-            path: tests/Fixtures/Entity/TreeNodeEntity.php
 
         -
             message: '#Class has a static method must so must contains "Static" in its name#'

@@ -20,7 +20,7 @@ trait SluggableMethodsTrait
     }
 
     /**
-     * Generates and sets the entity's slug. Called prePersist and preUpdate
+     * Generates and sets the entity's slug. Called prePersist and preUpdate.
      */
     public function generateSlug(): void
     {
@@ -55,7 +55,7 @@ trait SluggableMethodsTrait
     {
         $usableValues = [];
         foreach ($values as $value) {
-            if (! empty($value)) {
+            if (!empty($value)) {
                 $usableValues[] = $value;
             }
         }
@@ -63,23 +63,20 @@ trait SluggableMethodsTrait
         $this->ensureAtLeastOneUsableValue($values, $usableValues);
 
         // generate the slug itself
-        $sluggableText = implode(' ', $usableValues);
+        $sluggableText = \implode(' ', $usableValues);
 
         $unicodeString = (new AsciiSlugger())->slug($sluggableText, $this->getSlugDelimiter());
 
-        return strtolower($unicodeString->toString());
+        return \strtolower($unicodeString->toString());
     }
 
     private function ensureAtLeastOneUsableValue(array $values, array $usableValues): void
     {
-        if (count($usableValues) >= 1) {
+        if (\count($usableValues) >= 1) {
             return;
         }
 
-        throw new SluggableException(sprintf(
-            'Sluggable expects to have at least one non-empty field from the following: ["%s"]',
-            implode('", "', array_keys($values))
-        ));
+        throw new SluggableException(\sprintf('Sluggable expects to have at least one non-empty field from the following: ["%s"]', \implode('", "', \array_keys($values))));
     }
 
     /**
@@ -87,12 +84,12 @@ trait SluggableMethodsTrait
      */
     private function resolveFieldValue(string $field)
     {
-        if (property_exists($this, $field)) {
+        if (\property_exists($this, $field)) {
             return $this->{$field};
         }
 
-        $methodName = 'get' . ucfirst($field);
-        if (method_exists($this, $methodName)) {
+        $methodName = 'get'.\ucfirst($field);
+        if (\method_exists($this, $methodName)) {
             return $this->{$methodName}();
         }
 

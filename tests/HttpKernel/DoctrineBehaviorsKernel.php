@@ -17,7 +17,7 @@ final class DoctrineBehaviorsKernel extends Kernel
      * @param string[] $configs
      */
     public function __construct(
-        private array $configs = []
+        private array $configs = [],
     ) {
         parent::__construct('test', false);
     }
@@ -32,17 +32,17 @@ final class DoctrineBehaviorsKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir() . '/doctrine_behaviors_test';
+        return \sys_get_temp_dir().'/doctrine_behaviors_test';
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir() . '/doctrine_behaviors_test_log';
+        return \sys_get_temp_dir().'/doctrine_behaviors_test_log';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(__DIR__ . '/../config/config_test.php');
+        $loader->load(__DIR__.'/../config/config_test.php');
 
         foreach ($this->configs as $config) {
             $loader->load($config);

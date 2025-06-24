@@ -17,7 +17,7 @@ trait SoftDeletableMethodsTrait
     }
 
     /**
-     * Restore entity by undeleting it
+     * Restore entity by undeleting it.
      */
     public function restore(): void
     {
@@ -39,7 +39,7 @@ trait SoftDeletableMethodsTrait
             return false;
         }
 
-        if ($deletedAt === null) {
+        if (!$deletedAt instanceof DateTimeInterface) {
             return true;
         }
 
@@ -58,12 +58,12 @@ trait SoftDeletableMethodsTrait
 
     private function currentDateTime(): DateTimeInterface
     {
-        $dateTime = DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)));
+        $dateTime = DateTime::createFromFormat('U.u', \sprintf('%.6F', \microtime(true)));
         if ($dateTime === false) {
             throw new ShouldNotHappenException();
         }
 
-        $dateTime->setTimezone(new DateTimeZone(date_default_timezone_get()));
+        $dateTime->setTimezone(new DateTimeZone(\date_default_timezone_get()));
 
         return $dateTime;
     }

@@ -17,7 +17,7 @@ trait UuidableMethodsTrait
 
     public function getUuid(): ?UuidInterface
     {
-        if (is_string($this->uuid)) {
+        if (\is_string($this->uuid)) {
             if ($this->uuid === '') {
                 throw new ShouldNotHappenException();
             }

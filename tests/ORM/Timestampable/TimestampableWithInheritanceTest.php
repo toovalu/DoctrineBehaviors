@@ -17,8 +17,8 @@ final class TimestampableWithInheritanceTest extends AbstractBehaviorTestCase
         $this->entityManager->persist($timestampableInheritedEntity);
         $this->entityManager->flush();
 
-        self::assertInstanceOf(Datetime::class, $timestampableInheritedEntity->getCreatedAt());
-        self::assertInstanceOf(Datetime::class, $timestampableInheritedEntity->getUpdatedAt());
+        self::assertInstanceOf(DateTime::class, $timestampableInheritedEntity->getCreatedAt());
+        self::assertInstanceOf(DateTime::class, $timestampableInheritedEntity->getUpdatedAt());
         self::assertSame(
             $timestampableInheritedEntity->getCreatedAt(),
             $timestampableInheritedEntity->getUpdatedAt(),

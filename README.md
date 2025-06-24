@@ -1,8 +1,6 @@
 # Doctrine Behaviors
 
-It's a fork !
-
-[![Downloads](https://img.shields.io/packagist/dt/knplabs/doctrine-behaviors.svg?style=flat-square)](https://packagist.org/packages/knplabs/doctrine-behaviors)
+It's a fork from https://github.com/KnpLabs/DoctrineBehaviors 
 
 This PHP library is a collection of traits and interfaces that add behaviors to Doctrine entities and repositories.
 
@@ -15,12 +13,11 @@ It currently handles:
  * [Uuidable](/docs/uuidable.md)
  * [Timestampable](/docs/timestampable.md)
  * [Translatable](/docs/translatable.md)
- * [Tree](/docs/tree.md)
 
 ## Install
 
 ```bash
-composer require knplabs/doctrine-behaviors
+composer require toovalu/doctrine-behaviors
 ```
 
 ## Usage

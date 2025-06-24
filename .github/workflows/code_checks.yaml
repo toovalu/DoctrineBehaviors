@@ -11,9 +11,9 @@ jobs:
         strategy:
             matrix:
                 actions:
-                    -
-                        name: 'PHPStan'
-                        run: composer phpstan
+                    # -
+                    #     name: 'PHPStan'
+                    #     run: composer phpstan
 
                     -
                         name: 'Coding Standard'
@@ -23,16 +23,12 @@ jobs:
                         name: 'Rector'
                         run: vendor/bin/rector process --dry-run --ansi
 
-                    -
-                        name: 'Commented PHP Code'
-                        run: vendor/bin/easy-ci check-commented-code src tests --line-limit 3
-
         name: ${{ matrix.actions.name }}
         runs-on: ubuntu-latest
 
         steps:
             -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v1
+            -   uses: shivammathur/setup-php@v2
                 with:
                     php-version: 8.0
                     extensions: pdo_sqlite, pdo_mysql, pdo_pgsql

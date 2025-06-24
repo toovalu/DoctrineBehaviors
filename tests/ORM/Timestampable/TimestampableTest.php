@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Timestampable;
 
-use Datetime;
+use DateTime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Timestampable\TimestampableEntity;
@@ -30,8 +30,8 @@ final class TimestampableTest extends AbstractBehaviorTestCase
         $this->entityManager->persist($timestampableEntity);
         $this->entityManager->flush();
 
-        $this->assertInstanceOf(Datetime::class, $timestampableEntity->getCreatedAt());
-        $this->assertInstanceOf(Datetime::class, $timestampableEntity->getUpdatedAt());
+        $this->assertInstanceOf(DateTime::class, $timestampableEntity->getCreatedAt());
+        $this->assertInstanceOf(DateTime::class, $timestampableEntity->getUpdatedAt());
 
         $this->assertSame(
             $timestampableEntity->getCreatedAt(),
@@ -53,7 +53,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
         $this->entityManager->clear();
 
         // wait for a second:
-        sleep(1);
+        \sleep(1);
 
         /** @var TimestampableEntity $entity */
         $entity = $this->timestampableRepository->find($id);
@@ -90,7 +90,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
 
         $this->entityManager->clear();
 
-        sleep(1);
+        \sleep(1);
 
         /** @var TimestampableEntity $entity */
         $entity = $this->timestampableRepository->find($id);
@@ -116,7 +116,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
 
         $this->entityManager->clear();
 
-        sleep(1);
+        \sleep(1);
 
         /** @var TimestampableEntity $entity */
         $entity = $this->timestampableRepository->find($id);
@@ -127,7 +127,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
 
         $updatedAt = $entity->getUpdatedAt();
 
-        sleep(1);
+        \sleep(1);
 
         $this->entityManager->flush();
 

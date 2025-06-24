@@ -22,7 +22,7 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private DefaultSluggableRepository $defaultSluggableRepository
+        private DefaultSluggableRepository $defaultSluggableRepository,
     ) {
     }
 
@@ -60,7 +60,7 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
 
     private function shouldSkip(ClassMetadataInfo $classMetadataInfo): bool
     {
-        if (! is_a($classMetadataInfo->getName(), SluggableInterface::class, true)) {
+        if (!\is_a($classMetadataInfo->getName(), SluggableInterface::class, true)) {
             return true;
         }
 
@@ -70,7 +70,7 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
     private function processLifecycleEventArgs(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof SluggableInterface) {
+        if (!$entity instanceof SluggableInterface) {
             return;
         }
 
@@ -88,11 +88,11 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
 
         $uniqueSlug = $slug;
 
-        while (! (
+        while (!(
             $this->defaultSluggableRepository->isSlugUniqueFor($sluggable, $uniqueSlug)
             && $this->isSlugUniqueInUnitOfWork($sluggable, $uniqueSlug)
         )) {
-            $uniqueSlug = $slug . '-' . ++$i;
+            $uniqueSlug = $slug.'-'.++$i;
         }
 
         $sluggable->setSlug($uniqueSlug);

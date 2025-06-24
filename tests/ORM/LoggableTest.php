@@ -32,7 +32,7 @@ final class LoggableTest extends AbstractBehaviorTestCase
         $expectedRecordCount = $this->isPostgreSql() ? 2 : 1;
         $this->assertCount($expectedRecordCount, $this->testLogger->records);
 
-        $expectedMessage = sprintf('%s #1 created', LoggableEntity::class);
+        $expectedMessage = \sprintf('%s #1 created', LoggableEntity::class);
         $this->assertSame($expectedMessage, $this->testLogger->records[0]['message']);
     }
 
@@ -65,9 +65,9 @@ final class LoggableTest extends AbstractBehaviorTestCase
         $expectedRecordCount = $this->isPostgreSql() ? 3 : 2;
         $this->assertCount($expectedRecordCount, $this->testLogger->records);
 
-        $lastRecord = array_pop($this->testLogger->records);
+        $lastRecord = \array_pop($this->testLogger->records);
 
-        $expectedMessage = sprintf(
+        $expectedMessage = \sprintf(
             '%s #1 : property "%s" changed from "" to "%s"',
             LoggableEntity::class,
             'title',
@@ -75,7 +75,7 @@ final class LoggableTest extends AbstractBehaviorTestCase
         );
         $this->assertStringContainsString($expectedMessage, $lastRecord['message']);
 
-        $expectedMessage = sprintf(
+        $expectedMessage = \sprintf(
             '%s #1 : property "%s" changed from "" to "%s"',
             LoggableEntity::class,
             'roles',
@@ -113,9 +113,9 @@ final class LoggableTest extends AbstractBehaviorTestCase
         $expectedRecordCount = $this->isPostgreSql() ? 3 : 2;
         $this->assertCount($expectedRecordCount, $this->testLogger->records);
 
-        $lastRecord = array_pop($this->testLogger->records);
+        $lastRecord = \array_pop($this->testLogger->records);
 
-        $expectedMessage = sprintf('%s #1 removed', LoggableEntity::class);
+        $expectedMessage = \sprintf('%s #1 removed', LoggableEntity::class);
         $this->assertSame($expectedMessage, $lastRecord['message']);
     }
 
@@ -126,10 +126,10 @@ final class LoggableTest extends AbstractBehaviorTestCase
 
         $this->assertCount(2, $this->testLogger->records);
 
-        $firstExpectedMessage = sprintf('%s #1 created', LoggableEntity::class);
+        $firstExpectedMessage = \sprintf('%s #1 created', LoggableEntity::class);
         $this->assertSame($firstExpectedMessage, $this->testLogger->records[0]['message']);
 
-        $secondExpectedMessage = sprintf(
+        $secondExpectedMessage = \sprintf(
             '%s #1 : property "%s" changed from "" to "%s"',
             LoggableEntity::class,
             $field,

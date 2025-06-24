@@ -21,16 +21,17 @@ final class EntityUserProvider implements UserProviderInterface
     private UserEntity $userEntity;
 
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
     public function changeUser(string $userName): void
     {
-        if ($this->userEntities !== [] && array_key_exists($userName, $this->userEntities)) {
+        if ($this->userEntities !== [] && \array_key_exists($userName, $this->userEntities)) {
             $this->userEntity = $this->userEntities[$userName];
         } else {
-            $errorMessage = sprintf('User with %s name was not found. Add it first.', $userName);
+            $errorMessage = \sprintf('User with %s name was not found. Add it first.', $userName);
+
             throw new ShouldNotHappenException($errorMessage);
         }
     }

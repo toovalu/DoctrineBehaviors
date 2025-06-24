@@ -28,7 +28,7 @@ class SluggableMultiEntity implements SluggableInterface
     private ?string $name = null;
 
     #[Column(type: 'datetime')]
-    private \DateTimeInterface|\DateTime $dateTime;
+    private DateTimeInterface|DateTime $dateTime;
 
     public function __construct()
     {
@@ -82,9 +82,9 @@ class SluggableMultiEntity implements SluggableInterface
      */
     public function generateSlugValue(array $values)
     {
-        $sluggableText = implode(' ', $values);
-        $sluggableText = str_replace(' ', '+', $sluggableText);
+        $sluggableText = \implode(' ', $values);
+        $sluggableText = \str_replace(' ', '+', $sluggableText);
 
-        return strtolower($sluggableText);
+        return \strtolower($sluggableText);
     }
 }

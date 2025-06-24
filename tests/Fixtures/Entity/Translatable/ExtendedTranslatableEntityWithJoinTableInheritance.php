@@ -26,7 +26,7 @@ class ExtendedTranslatableEntityWithJoinTableInheritance extends TranslatableEnt
         return $this->untranslatedField;
     }
 
-    public function setUntranslatedField(String $untranslatedField): void
+    public function setUntranslatedField(string $untranslatedField): void
     {
         $this->untranslatedField = $untranslatedField;
     }

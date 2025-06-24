@@ -34,12 +34,12 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
     public function __construct(
         private UserProviderInterface $userProvider,
         private EntityManagerInterface $entityManager,
-        private ?string $blameableUserEntity = null
+        private ?string $blameableUserEntity = null,
     ) {
     }
 
     /**
-     * Adds metadata about how to store user, either a string or an ManyToOne association on user entity
+     * Adds metadata about how to store user, either a string or an ManyToOne association on user entity.
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
@@ -49,7 +49,7 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (! is_a($classMetadata->reflClass->getName(), BlameableInterface::class, true)) {
+        if (!\is_a($classMetadata->reflClass->getName(), BlameableInterface::class, true)) {
             return;
         }
 
@@ -57,12 +57,12 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Stores the current user into createdBy and updatedBy properties
+     * Stores the current user into createdBy and updatedBy properties.
      */
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof BlameableInterface) {
+        if (!$entity instanceof BlameableInterface) {
             return;
         }
 
@@ -72,14 +72,14 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (! $entity->getCreatedBy()) {
+        if (!$entity->getCreatedBy()) {
             $entity->setCreatedBy($user);
 
             $this->getUnitOfWork()
                 ->propertyChanged($entity, self::CREATED_BY, null, $user);
         }
 
-        if (! $entity->getUpdatedBy()) {
+        if (!$entity->getUpdatedBy()) {
             $entity->setUpdatedBy($user);
 
             $this->getUnitOfWork()
@@ -88,12 +88,12 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Stores the current user into updatedBy property
+     * Stores the current user into updatedBy property.
      */
     public function preUpdate(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof BlameableInterface) {
+        if (!$entity instanceof BlameableInterface) {
             return;
         }
 
@@ -110,12 +110,12 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Stores the current user into deletedBy property
+     * Stores the current user into deletedBy property.
      */
     public function preRemove(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getEntity();
-        if (! $entity instanceof BlameableInterface) {
+        if (!$entity instanceof BlameableInterface) {
             return;
         }
 
@@ -141,7 +141,7 @@ final class BlameableEventSubscriber implements EventSubscriberInterface
 
     private function mapEntity(ClassMetadataInfo $classMetadataInfo): void
     {
-        if ($this->blameableUserEntity !== null && class_exists($this->blameableUserEntity)) {
+        if ($this->blameableUserEntity !== null && \class_exists($this->blameableUserEntity)) {
             $this->mapManyToOneUser($classMetadataInfo);
         } else {
             $this->mapStringUser($classMetadataInfo);

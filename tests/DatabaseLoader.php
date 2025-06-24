@@ -12,7 +12,7 @@ final class DatabaseLoader
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        Connection $connection
+        Connection $connection,
     ) {
         // @see https://stackoverflow.com/a/35222045/1348344
         $configuration = $connection->getConfiguration();

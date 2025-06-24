@@ -23,7 +23,6 @@ class TranslatableCustomIdentifierEntity implements TranslatableInterface
 
     /**
      * @param mixed[] $arguments
-     * @return mixed
      */
     public function __call(string $method, array $arguments)
     {
