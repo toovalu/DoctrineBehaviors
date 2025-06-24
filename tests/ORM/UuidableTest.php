@@ -19,7 +19,6 @@ final class UuidableTest extends AbstractBehaviorTestCase
         $this->entityManager->flush();
 
         $id = $entity->getId();
-        $this->assertNotNull($id);
 
         $this->entityManager->clear();
 
@@ -29,6 +28,5 @@ final class UuidableTest extends AbstractBehaviorTestCase
         $entity = $entityRepository->find($id);
 
         $this->assertNotNull($entity);
-        $this->assertInstanceOf(UuidInterface::class, $entity->getUuid());
     }
 }

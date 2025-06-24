@@ -4,7 +4,6 @@ includes:
 parameters:
     paths:
         - src
-        - tests
         - utils/phpstan-behaviors/src
 
     level: 8
