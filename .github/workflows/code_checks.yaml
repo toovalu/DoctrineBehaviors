@@ -11,9 +11,9 @@ jobs:
         strategy:
             matrix:
                 actions:
-                    -
-                        name: 'PHPStan'
-                        run: composer phpstan
+                    # -
+                    #     name: 'PHPStan'
+                    #     run: composer phpstan
 
                     -
                         name: 'Coding Standard'

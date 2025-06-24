@@ -7,7 +7,7 @@ parameters:
         - tests
         - utils/phpstan-behaviors/src
 
-    level: 3
+    level: 8
 
     # to allow installing with various phsptan versions without reporting old errors here
     reportUnmatchedIgnoredErrors: false
