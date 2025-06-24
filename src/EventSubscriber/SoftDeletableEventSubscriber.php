@@ -11,7 +11,7 @@ use Doctrine\ORM\Events;
 use Knp\DoctrineBehaviors\Contract\Entity\SoftDeletableInterface;
 
 final class SoftDeletableEventSubscriber implements EventSubscriberInterface
-{
+{ 
     /**
      * @var string
      */
@@ -22,19 +22,19 @@ final class SoftDeletableEventSubscriber implements EventSubscriberInterface
         $entityManager = $onFlushEventArgs->getEntityManager();
         $unitOfWork = $entityManager->getUnitOfWork();
 
-        foreach ($unitOfWork->getScheduledEntityDeletions() as $entity) {
-            if (!$entity instanceof SoftDeletableInterface) {
+        foreach ($unitOfWork->getScheduledEntityDeletions() as $scheduledEntityDeletion) {
+            if (!$scheduledEntityDeletion instanceof SoftDeletableInterface) {
                 continue;
             }
 
-            $oldValue = $entity->getDeletedAt();
+            $oldValue = $scheduledEntityDeletion->getDeletedAt();
 
-            $entity->delete();
-            $entityManager->persist($entity);
+            $scheduledEntityDeletion->delete();
+            $entityManager->persist($scheduledEntityDeletion);
 
-            $unitOfWork->propertyChanged($entity, self::DELETED_AT, $oldValue, $entity->getDeletedAt());
-            $unitOfWork->scheduleExtraUpdate($entity, [
-                self::DELETED_AT => [$oldValue, $entity->getDeletedAt()],
+            $unitOfWork->propertyChanged($scheduledEntityDeletion, self::DELETED_AT, $oldValue, $scheduledEntityDeletion->getDeletedAt());
+            $unitOfWork->scheduleExtraUpdate($scheduledEntityDeletion, [
+                self::DELETED_AT => [$oldValue, $scheduledEntityDeletion->getDeletedAt()],
             ]);
         }
     }
