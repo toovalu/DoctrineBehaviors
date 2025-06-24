@@ -11,7 +11,7 @@ use Doctrine\ORM\Events;
 use Knp\DoctrineBehaviors\Contract\Entity\SoftDeletableInterface;
 
 final class SoftDeletableEventSubscriber implements EventSubscriberInterface
-{ 
+{
     /**
      * @var string
      */
