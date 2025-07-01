@@ -16,6 +16,9 @@ final class UserProvider implements UserProviderInterface
     ) {
     }
 
+    /**
+     * @return object|null
+     */
     public function provideUser()
     {
         $token = $this->security->getToken();
@@ -40,10 +43,6 @@ final class UserProvider implements UserProviderInterface
             return null;
         }
 
-        if (\is_object($user)) {
-            return $user::class;
-        }
-
-        return null;
+        return $user::class;
     }
 }

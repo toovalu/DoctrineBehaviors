@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests\Repository;
 
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 use Knp\DoctrineBehaviors\Repository\DefaultSluggableRepository;
@@ -20,25 +22,25 @@ final class DefaultSluggableRepositoryTest extends TestCase
      */
     private $entityManager;
 
-    private DefaultSluggableRepository $defaultSluggableRepository;
+    private MockObject|DefaultSluggableRepository $defaultSluggableRepository;
 
     protected function setUp(): void
     {
         $this->defaultSluggableRepository = new DefaultSluggableRepository(
-            $this->entityManager = $this->createMock(EntityManagerInterface::class)
+            $this->entityManager = $this->createMock(EntityManager::class)
         );
     }
 
     public function testIsSlugUniqueFor(): void
     {
-        $sluggable = $this->createMock(SluggableInterface::class);
+        $sluggable =  $this->createMock(SluggableInterface::class);
         $entityClass = $sluggable::class;
         $uniqueSlug = 'foobar';
-
+        $metadata = $this->createMock(ClassMetadata::class);
         $this->entityManager->expects(self::once())
             ->method('getClassMetadata')
             ->with($entityClass)
-            ->willReturn($metadata = $this->createMock(ClassMetadata::class));
+            ->willReturn($metadata);
 
         $metadata->expects(self::once())
             ->method('getIdentifierValues')
@@ -73,9 +75,12 @@ final class DefaultSluggableRepositoryTest extends TestCase
             ->withConsecutive(['slug', $uniqueSlug], ['id_id', '123'])
             ->willReturnSelf();
 
+        
+
+        //  dd($queryBuilder->getQuery());
         $queryBuilder->expects(self::once())
             ->method('getQuery')
-            ->willReturn($query = $this->createMock(AbstractQuery::class));
+            ->willReturn($query = $this->createMock(Query::class));
 
         $query->expects(self::once())
             ->method('getSingleScalarResult')

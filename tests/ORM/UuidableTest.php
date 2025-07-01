@@ -7,7 +7,6 @@ namespace Knp\DoctrineBehaviors\Tests\ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\UuidableInterface;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\UuidableEntity;
-use Ramsey\Uuid\UuidInterface;
 
 final class UuidableTest extends AbstractBehaviorTestCase
 {

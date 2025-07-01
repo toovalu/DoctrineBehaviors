@@ -28,7 +28,7 @@ class LoggableEntity implements LoggableInterface
     /**
      * @var string[]|null
      */
-    #[Column(type: 'array', nullable: true)]
+    #[Column(type: 'simple_array', nullable: true)]
     private ?array $roles = null;
 
     #[Column(type: 'date', nullable: true)]

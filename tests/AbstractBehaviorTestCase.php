@@ -6,16 +6,11 @@ namespace Knp\DoctrineBehaviors\Tests;
 
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Logging\DebugStack;
 use Doctrine\DBAL\Logging\Middleware;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\DoctrineBehaviors\Tests\HttpKernel\DoctrineBehaviorsKernel;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\TestHandler;
-use Monolog\Processor\PsrLogMessageProcessor;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Log\Logger;
 
@@ -68,7 +63,7 @@ abstract class AbstractBehaviorTestCase extends TestCase
         $configuration = $this->entityManager->getConnection()->getConfiguration();
         $configuration->setMiddlewares([new Middleware($logger)]);
 
-        $configuration = (new Configuration())->setMiddlewares([new Middleware($logger)]);
+        (new Configuration())->setMiddlewares([new Middleware($logger)]);
 
         return $logger;
     }
