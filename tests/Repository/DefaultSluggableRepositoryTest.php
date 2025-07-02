@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\Repository;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -74,8 +73,6 @@ final class DefaultSluggableRepositoryTest extends TestCase
             ->method('setParameter')
             ->withConsecutive(['slug', $uniqueSlug], ['id_id', '123'])
             ->willReturnSelf();
-
-        
 
         //  dd($queryBuilder->getQuery());
         $queryBuilder->expects(self::once())

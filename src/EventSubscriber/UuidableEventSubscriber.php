@@ -17,7 +17,6 @@ final class UuidableEventSubscriber
 {
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
-
         $classMetadata = $loadClassMetadataEventArgs->getClassMetadata();
         if ($classMetadata->reflClass === null) {
             // Class has not yet been fully built, ignore this event

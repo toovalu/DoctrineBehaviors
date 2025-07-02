@@ -11,16 +11,16 @@ use Knp\DoctrineBehaviors\Exception\TranslatableException;
 
 trait TranslatableMethodsTrait
 {
+    public function __constructTranslatableTrait() {
+        $this->translations = new ArrayCollection();
+        $this->newTranslations = new ArrayCollection();
+    }
+
     /**
      * @return Collection<string, TranslationInterface>
      */
     public function getTranslations()
     {
-        // initialize collection, usually in ctor
-        if ($this->translations === null) {
-            $this->translations = new ArrayCollection();
-        }
-
         return $this->translations;
     }
 
@@ -43,11 +43,10 @@ trait TranslatableMethodsTrait
      */
     public function getNewTranslations(): Collection
     {
-        // initialize collection, usually in ctor
-        if ($this->newTranslations === null) {
+        if($this->newTranslations === null) {
             $this->newTranslations = new ArrayCollection();
         }
-
+        
         return $this->newTranslations;
     }
 

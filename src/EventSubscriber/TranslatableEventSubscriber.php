@@ -75,14 +75,6 @@ final class TranslatableEventSubscriber
     }
 
     /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata, Events::postLoad, Events::prePersist];
-    }
-
-    /**
      * Convert string FETCH mode to required string.
      */
     private function convertFetchString(string|int $fetchMode): int
@@ -112,7 +104,7 @@ final class TranslatableEventSubscriber
             'fieldName' => 'translations',
             'mappedBy' => 'translatable',
             'indexBy' => self::LOCALE,
-            'cascade' => ['persist', 'merge', 'remove'],
+            'cascade' => ['persist', 'remove'],  //FIX ME Merge is not supported for Doctrine/Orm see https://github.com/slevomat/doctrine-orm/blob/master/UPGRADE.md
             'fetch' => $this->translatableFetchMode,
             'targetEntity' => $classMetadata->getReflectionClass()
                 ->getMethod('getTranslationEntityClass')
@@ -135,7 +127,7 @@ final class TranslatableEventSubscriber
             $classMetadata->mapManyToOne([
                 'fieldName' => 'translatable',
                 'inversedBy' => 'translations',
-                'cascade' => ['persist', 'merge'],
+                'cascade' => ['persist'], //FIX ME Merge is not supported for Doctrine/Orm see https://github.com/slevomat/doctrine-orm/blob/master/UPGRADE.md
                 'fetch' => $this->translationFetchMode,
                 'joinColumns' => [[
                     'name' => 'translatable_id',
