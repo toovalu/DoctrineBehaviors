@@ -7,7 +7,6 @@ This PHP library is a collection of traits and interfaces that add behaviors to 
 It currently handles:
 
  * [Blameable](/docs/blameable.md)
- * [Loggable](/docs/loggable.md)
  * [Sluggable](/docs/sluggable.md)
  * [SoftDeletable](/docs/soft-deletable.md)
  * [Uuidable](/docs/uuidable.md)
