@@ -17,6 +17,7 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 #[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::prePersist, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::preUpdate, priority: 500, connection: 'default')]
+#[AsDoctrineListener(event: Events::preRemove, priority: 500, connection: 'default')]
 final class BlameableEventSubscriber
 {
     /**
