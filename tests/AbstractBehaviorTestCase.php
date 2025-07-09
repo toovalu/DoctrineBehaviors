@@ -57,18 +57,6 @@ abstract class AbstractBehaviorTestCase extends TestCase
         return [];
     }
 
-    protected function createAndRegisterDebugStack(): Middleware
-    {
-      //  $logger = new Logger(LogLevel::DEBUG, debug:true);
-     //   $configuration = $this->entityManager->getConnection()->getConfiguration();
-      //  $configuration->getMiddlewares([new Middleware($logger)]);
-
-        //$debugStack = new Logger(LogLevel::DEBUG, debug: true);
-        $middlewares = $this->entityManager->getConnection()->getConfiguration()->getMiddlewares();
-        
-        return $middlewares[0];
-    }
-
     /**
      * @template T as object
      *
