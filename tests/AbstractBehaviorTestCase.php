@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests;
 
-use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Logging\Middleware;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\DoctrineBehaviors\Tests\HttpKernel\DoctrineBehaviorsKernel;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LogLevel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Log\Logger;
 
@@ -57,15 +57,16 @@ abstract class AbstractBehaviorTestCase extends TestCase
         return [];
     }
 
-    protected function createAndRegisterDebugStack(): Logger
+    protected function createAndRegisterDebugStack(): Middleware
     {
-        $logger = new Logger('PHPUnit');
-        $configuration = $this->entityManager->getConnection()->getConfiguration();
-        $configuration->setMiddlewares([new Middleware($logger)]);
+      //  $logger = new Logger(LogLevel::DEBUG, debug:true);
+     //   $configuration = $this->entityManager->getConnection()->getConfiguration();
+      //  $configuration->getMiddlewares([new Middleware($logger)]);
 
-        (new Configuration())->setMiddlewares([new Middleware($logger)]);
-
-        return $logger;
+        //$debugStack = new Logger(LogLevel::DEBUG, debug: true);
+        $middlewares = $this->entityManager->getConnection()->getConfiguration()->getMiddlewares();
+        
+        return $middlewares[0];
     }
 
     /**

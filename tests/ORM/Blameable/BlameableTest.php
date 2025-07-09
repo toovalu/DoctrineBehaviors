@@ -66,6 +66,7 @@ final class BlameableTest extends AbstractBehaviorTestCase
 
         // need to modify at least one column to trigger onUpdate
         $entity->setTitle('test');
+
         $this->entityManager->flush();
         $this->entityManager->clear();
 

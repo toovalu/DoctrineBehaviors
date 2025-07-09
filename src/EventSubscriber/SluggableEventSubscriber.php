@@ -47,14 +47,14 @@ final class SluggableEventSubscriber
         $this->addSlugMapping($classMetadata);
     }   
 
-    public function prePersist(PrePersistEventArgs $lifecycleEventArgs): void
+    public function prePersist(PrePersistEventArgs $prePersistEventArgs): void
     {
-        $this->processLifecycleEventArgs($lifecycleEventArgs);
+        $this->processLifecycleEventArgs($prePersistEventArgs);
     }
 
-    public function preUpdate(PreUpdateEventArgs $lifecycleEventArgs): void
+    public function preUpdate(PreUpdateEventArgs $preUpdateEventArgs): void
     {
-        $this->processLifecycleEventArgs($lifecycleEventArgs);
+        $this->processLifecycleEventArgs($preUpdateEventArgs);
     }
 
     private function addSlugMapping(ClassMetadata $classMetadata): void

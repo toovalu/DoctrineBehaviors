@@ -4,24 +4,30 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Knp\DoctrineBehaviors\Contract\Entity\SoftDeletableInterface;
 
-final class SoftDeletableEventSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
+#[AsDoctrineListener(event: Events::onFlush, priority: 500, connection: 'default')]
+final class SoftDeletableEventSubscriber
 {
     /**
      * @var string
      */
     private const DELETED_AT = 'deletedAt';
 
-    public function onFlush(OnFlushEventArgs $onFlushEventArgs): void
-    {
-        $entityManager = $onFlushEventArgs->getEntityManager();
-        $unitOfWork = $entityManager->getUnitOfWork();
+     public function __construct(
+         private EntityManagerInterface $entityManager,
+     ) {
+    }
 
+    public function onFlush(): void
+    {
+        $unitOfWork = $this->entityManager->getUnitOfWork();
         foreach ($unitOfWork->getScheduledEntityDeletions() as $scheduledEntityDeletion) {
             if (!$scheduledEntityDeletion instanceof SoftDeletableInterface) {
                 continue;
@@ -30,7 +36,7 @@ final class SoftDeletableEventSubscriber implements EventSubscriberInterface
             $oldValue = $scheduledEntityDeletion->getDeletedAt();
 
             $scheduledEntityDeletion->delete();
-            $entityManager->persist($scheduledEntityDeletion);
+            $this->entityManager->persist($scheduledEntityDeletion);
 
             $unitOfWork->propertyChanged($scheduledEntityDeletion, self::DELETED_AT, $oldValue, $scheduledEntityDeletion->getDeletedAt());
             $unitOfWork->scheduleExtraUpdate($scheduledEntityDeletion, [
@@ -60,13 +66,5 @@ final class SoftDeletableEventSubscriber implements EventSubscriberInterface
             'type' => 'datetime',
             'nullable' => true,
         ]);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::onFlush, Events::loadClassMetadata];
     }
 }
