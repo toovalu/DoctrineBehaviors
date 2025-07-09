@@ -45,6 +45,16 @@ final class SluggableEventSubscriber
         }
         
         $this->addSlugMapping($classMetadata);
+    }   
+
+    public function prePersist(PrePersistEventArgs $lifecycleEventArgs): void
+    {
+        $this->processLifecycleEventArgs($lifecycleEventArgs);
+    }
+
+    public function preUpdate(PreUpdateEventArgs $lifecycleEventArgs): void
+    {
+        $this->processLifecycleEventArgs($lifecycleEventArgs);
     }
 
     private function addSlugMapping(ClassMetadata $classMetadata): void
@@ -58,16 +68,6 @@ final class SluggableEventSubscriber
             'type' => 'string',
             'nullable' => true,
         ]);
-    }   
-
-    public function prePersist(PrePersistEventArgs $lifecycleEventArgs): void
-    {
-        $this->processLifecycleEventArgs($lifecycleEventArgs);
-    }
-
-    public function preUpdate(PreUpdateEventArgs $lifecycleEventArgs): void
-    {
-        $this->processLifecycleEventArgs($lifecycleEventArgs);
     }
 
     private function shouldSkip(ClassMetadata $classMetadata): bool
