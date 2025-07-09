@@ -1,5 +1,5 @@
 {
-    "name": "toovalu/doctrine-behaviors-light",
+    "name": "toovalu-github/doctrine-behaviors",
     "description": "Doctrine Behavior Traits",
     "type": "symfony-bundle",
     "keywords": [
