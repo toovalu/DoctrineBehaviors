@@ -30,7 +30,7 @@ final class QueryLogger  extends AbstractLogger
 
     public static function getInstance(): self
     {
-        if (self::$queryLogger === null) {
+        if (!self::$queryLogger instanceof \Knp\DoctrineBehaviors\Logger\QueryLogger) {
             self::$queryLogger = new self();
         }
 
