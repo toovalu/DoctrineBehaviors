@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Logging\Middleware;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\DoctrineBehaviors\Tests\HttpKernel\DoctrineBehaviorsKernel;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LogLevel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Log\Logger;
 
 abstract class AbstractBehaviorTestCase extends TestCase
 {
