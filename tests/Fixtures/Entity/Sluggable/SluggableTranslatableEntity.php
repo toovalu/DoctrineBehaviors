@@ -21,6 +21,11 @@ class SluggableTranslatableEntity implements TranslatableInterface
     #[GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
+    public function __construct()
+    {
+        $this->__constructTranslatableTrait();
+    }
+
     public function getId(): int
     {
         return $this->id;

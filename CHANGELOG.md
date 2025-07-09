@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 PRs and issues are linked, so you can find more about it. Thanks to [ChangelogLinker](https://github.com/Symplify/ChangelogLinker).
 
-<!-- changelog-linker -->
+## [v3.0.0] - 2025-07-09
+
+- [#2] upgrades Doctrine ORM to v3 and DBAL to v4
+
+<!-- changelog from Knp/Doctrine-behaviours -->
 
 ## [v2.0.1] - 2020-01-08
 

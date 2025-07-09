@@ -7,7 +7,7 @@ namespace Knp\DoctrineBehaviors\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 
-final class DefaultSluggableRepository
+class DefaultSluggableRepository
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

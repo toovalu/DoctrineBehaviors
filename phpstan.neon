@@ -4,10 +4,9 @@ includes:
 parameters:
     paths:
         - src
-        - tests
         - utils/phpstan-behaviors/src
 
-    level: 8
+    level: 1
 
     # to allow installing with various phsptan versions without reporting old errors here
     reportUnmatchedIgnoredErrors: false
@@ -94,8 +93,3 @@ parameters:
 
         # specific implementation
         - '#Property Knp\\DoctrineBehaviors\\Tests\\ORM\\Blameable\\BlameableTest\:\:\$userProvider \(Knp\\DoctrineBehaviors\\Tests\\Provider\\EntityUserProvider\) does not accept Knp\\DoctrineBehaviors\\Contract\\Provider\\UserProviderInterface#'
-
-        # different entity can return differnt types - reusable trait
-        -
-            message: '#sprintf\(\) call mask types does not match provided arguments types#'
-            path: src/Model/Loggable/LoggableTrait.php

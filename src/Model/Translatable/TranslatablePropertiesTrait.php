@@ -12,7 +12,7 @@ trait TranslatablePropertiesTrait
     /**
      * @var Collection<string, TranslationInterface>
      */
-    protected $translations;
+    protected Collection $translations;
 
     /**
      * @see mergeNewTranslations

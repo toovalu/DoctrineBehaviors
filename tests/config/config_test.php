@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
 use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
-use Knp\DoctrineBehaviors\EventSubscriber\LoggableEventSubscriber;
 use Knp\DoctrineBehaviors\Tests\DatabaseLoader;
 use Knp\DoctrineBehaviors\Tests\Provider\TestLocaleProvider;
 use Knp\DoctrineBehaviors\Tests\Provider\TestUserProvider;
@@ -45,9 +44,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->alias(UserProviderInterface::class, TestUserProvider::class);
 
     $services->set(DatabaseLoader::class);
-
-    $services->set(LoggableEventSubscriber::class)
-        ->arg('$logger', service(TestLogger::class));
 
     $containerConfigurator->extension('doctrine', [
         'dbal' => [

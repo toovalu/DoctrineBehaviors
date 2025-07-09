@@ -4,16 +4,22 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 use Knp\DoctrineBehaviors\Repository\DefaultSluggableRepository;
+use ReflectionClass;
 
-final class SluggableEventSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
+#[AsDoctrineListener(event: Events::prePersist, priority: 500, connection: 'default')]
+#[AsDoctrineListener(event: Events::preUpdate, priority: 500, connection: 'default')]
+final class SluggableEventSubscriber
 {
     /**
      * @var string
@@ -29,7 +35,31 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
         $classMetadata = $loadClassMetadataEventArgs->getClassMetadata();
+        if (!$classMetadata->reflClass instanceof ReflectionClass) {
+            // Class has not yet been fully built, ignore this event
+            return;
+        }
+
         if ($this->shouldSkip($classMetadata)) {
+            return;
+        }
+        
+        $this->addSlugMapping($classMetadata);
+    }   
+
+    public function prePersist(PrePersistEventArgs $prePersistEventArgs): void
+    {
+        $this->processLifecycleEventArgs($prePersistEventArgs);
+    }
+
+    public function preUpdate(PreUpdateEventArgs $preUpdateEventArgs): void
+    {
+        $this->processLifecycleEventArgs($preUpdateEventArgs);
+    }
+
+    private function addSlugMapping(ClassMetadata $classMetadata): void
+    {
+        if ($classMetadata->hasField(self::SLUG)) {
             return;
         }
 
@@ -40,36 +70,18 @@ final class SluggableEventSubscriber implements EventSubscriberInterface
         ]);
     }
 
-    public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
+    private function shouldSkip(ClassMetadata $classMetadata): bool
     {
-        $this->processLifecycleEventArgs($lifecycleEventArgs);
-    }
-
-    public function preUpdate(LifecycleEventArgs $lifecycleEventArgs): void
-    {
-        $this->processLifecycleEventArgs($lifecycleEventArgs);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [Events::loadClassMetadata, Events::prePersist, Events::preUpdate];
-    }
-
-    private function shouldSkip(ClassMetadataInfo $classMetadataInfo): bool
-    {
-        if (!\is_a($classMetadataInfo->getName(), SluggableInterface::class, true)) {
+        if (!\is_a($classMetadata->getName(), SluggableInterface::class, true)) {
             return true;
         }
 
-        return $classMetadataInfo->hasField(self::SLUG);
+        return $classMetadata->hasField(self::SLUG);
     }
 
     private function processLifecycleEventArgs(LifecycleEventArgs $lifecycleEventArgs): void
     {
-        $entity = $lifecycleEventArgs->getEntity();
+        $entity = $lifecycleEventArgs->getObject();
         if (!$entity instanceof SluggableInterface) {
             return;
         }

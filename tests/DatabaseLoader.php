@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Logging\Middleware;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
+use Knp\DoctrineBehaviors\Logger\QueryLogger;
 
 final class DatabaseLoader
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        Connection $connection,
+        QueryLogger $queryLogger
     ) {
-        // @see https://stackoverflow.com/a/35222045/1348344
-        $configuration = $connection->getConfiguration();
-        $configuration->setSQLLogger();
+        $entityManager->getConnection()->getConfiguration()->setMiddlewares([new Middleware($queryLogger)]);
     }
 
     public function reload(): void

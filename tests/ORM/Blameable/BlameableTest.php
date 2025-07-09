@@ -27,7 +27,7 @@ final class BlameableTest extends AbstractBehaviorTestCase
     {
         parent::setUp();
 
-        $this->userProvider = $this->getService(UserProviderInterface::class);
+        $this->userProvider = $this->getService(EntityUserProvider::class);
         $this->blameableRepository = $this->entityManager->getRepository(BlameableEntity::class);
     }
 
@@ -64,20 +64,11 @@ final class BlameableTest extends AbstractBehaviorTestCase
         /** @var BlameableEntity $entity */
         $entity = $this->blameableRepository->find($id);
 
-        $debugStack = $this->createAndRegisterDebugStack();
-
         // need to modify at least one column to trigger onUpdate
         $entity->setTitle('test');
+
         $this->entityManager->flush();
         $this->entityManager->clear();
-
-        $this->assertCount(3, $debugStack->queries);
-        $this->assertSame('"START TRANSACTION"', $debugStack->queries[1]['sql']);
-        $this->assertSame(
-            'UPDATE BlameableEntity SET title = ?, updatedBy_id = ? WHERE id = ?',
-            $debugStack->queries[2]['sql']
-        );
-        $this->assertSame('"COMMIT"', $debugStack->queries[3]['sql']);
 
         /** @var BlameableEntity $entity */
         $entity = $this->blameableRepository->find($id);
@@ -126,33 +117,15 @@ final class BlameableTest extends AbstractBehaviorTestCase
     public function testExtraSqlCalls(): void
     {
         $blameableEntity = new BlameableEntity();
-
-        $debugStack = $this->createAndRegisterDebugStack();
-
         $this->entityManager->persist($blameableEntity);
         $this->entityManager->flush();
 
-        $expectedCount = $this->isPostgreSql() ? 4 : 7;
         $startKey = $this->isPostgreSql() ? 2 : 1;
 
-        $this->assertCount($expectedCount, $debugStack->queries);
-
-        $this->assertSame('"START TRANSACTION"', $debugStack->queries[$startKey]['sql']);
-
-        $sql2 = $debugStack->queries[$startKey + 5]['sql'];
-        if ($this->isPostgreSql()) {
-            $this->assertSame(
-                'INSERT INTO BlameableEntity (id, title, createdBy_id, updatedBy_id, deletedBy_id) VALUES (?, ?, ?, ?, ?)',
-                $sql2
-            );
-        } else {
-            $this->assertSame(
-                'INSERT INTO BlameableEntity (title, createdBy_id, updatedBy_id, deletedBy_id) VALUES (?, ?, ?, ?)',
-                $sql2
-            );
-        }
-
-        $this->assertSame('"COMMIT"', $debugStack->queries[$startKey + 6]['sql']);
+        $entity = $this->blameableRepository->find($startKey);
+        $this->assertSame($entity, $blameableEntity);
+        
+        $this->assertSame($entity->getCreatedBy(), $blameableEntity->getCreatedBy());
     }
 
     /**

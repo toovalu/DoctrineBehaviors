@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\EventSubscriber;
 
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 
-final class TimestampableEventSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
+final class TimestampableEventSubscriber
 {
     public function __construct(
         private string $timestampableDateFieldType,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
@@ -21,6 +25,10 @@ final class TimestampableEventSubscriber implements EventSubscriberInterface
         $classMetadata = $loadClassMetadataEventArgs->getClassMetadata();
         if ($classMetadata->reflClass === null) {
             // Class has not yet been fully built, ignore this event
+            return;
+        }
+
+        if(!($classMetadata instanceof ClassMetadata)) {
             return;
         }
 
