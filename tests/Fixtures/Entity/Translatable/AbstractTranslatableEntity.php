@@ -12,11 +12,6 @@ use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 abstract class AbstractTranslatableEntity implements TranslatableInterface
 {
     use TranslatableTrait;
-
-    public function __construct()
-    {
-        $this->__constructTranslatableTrait();
-    }
     
     public function __call(string $method, array $arguments)
     {

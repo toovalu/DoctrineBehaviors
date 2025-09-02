@@ -24,11 +24,6 @@ class TranslatableEntityWithJoinTableInheritance implements TranslatableInterfac
     #[Column(type: 'integer')]
     #[GeneratedValue(strategy: 'AUTO')]
     private int $id;
-
-    public function __construct()
-    {
-        $this->__constructTranslatableTrait();
-    }
     
     public function __call(string $method, array $arguments)
     {

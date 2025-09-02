@@ -20,11 +20,6 @@ class TranslatableEntityWithCustomInterface implements ExtendedTranslatableInter
     #[GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
-    public function __construct()
-    {
-        $this->__constructTranslatableTrait();
-    }
-
     public function __call(string $method, array $arguments)
     {
         return $this->proxyCurrentLocaleTranslation($method, $arguments);

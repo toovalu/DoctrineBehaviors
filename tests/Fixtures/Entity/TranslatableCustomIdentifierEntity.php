@@ -21,11 +21,6 @@ class TranslatableCustomIdentifierEntity implements TranslatableInterface
     #[GeneratedValue(strategy: 'AUTO')]
     private int $idColumn;
 
-    public function __construct()
-    {
-        $this->__constructTranslatableTrait();
-    }
-
     /**
      * @param mixed[] $arguments
      */
