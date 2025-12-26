@@ -18,22 +18,22 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 #[AsDoctrineListener(event: Events::prePersist, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::preUpdate, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::preRemove, priority: 500, connection: 'default')]
-final class BlameableEventSubscriber
+final readonly class BlameableEventSubscriber
 {
     /**
      * @var string
      */
-    private const DELETED_BY = 'deletedBy';
+    private const string DELETED_BY = 'deletedBy';
 
     /**
      * @var string
      */
-    private const UPDATED_BY = 'updatedBy';
+    private const string UPDATED_BY = 'updatedBy';
 
     /**
      * @var string
      */
-    private const CREATED_BY = 'createdBy';
+    private const string CREATED_BY = 'createdBy';
 
     public function __construct(
         private UserProviderInterface $userProvider,
