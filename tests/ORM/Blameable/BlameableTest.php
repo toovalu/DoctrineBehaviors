@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Blameable;
 
-use Override;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Blameable\BlameableEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\UserEntity;
 use Knp\DoctrineBehaviors\Tests\Provider\EntityUserProvider;
+use Override;
 
 final class BlameableTest extends AbstractBehaviorTestCase
 {

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests\ORM\Sluggable;
 
 use DateTime;
-use Override;
 use Doctrine\Persistence\ObjectRepository;
 use Iterator;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableEntity;
+use Override;
 
 final class SluggableTest extends AbstractBehaviorTestCase
 {

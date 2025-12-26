@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\HttpKernel;
 
-use Override;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
+use Override;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;

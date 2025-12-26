@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Translatable;
 
-use Override;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Translatable\ExtendedTranslatableEntityWithJoinTableInheritance;
+use Override;
 
 final class TranslatableJoinTableInheritanceTest extends AbstractBehaviorTestCase
 {
