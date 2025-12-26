@@ -11,7 +11,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set('doctrine_behaviors_translation_fetch_mode', 'LAZY');
     $parameters->set('doctrine_behaviors_blameable_user_entity', null);
     $parameters->set('doctrine_behaviors_timestampable_date_field_type', 'datetime');
-    $parameters->set('doctrine_behaviors_enable_native_lazy_objects', true);
 
     $services = $containerConfigurator->services();
 

@@ -1,0 +1,5 @@
+doctrine:
+    orm:
+        enable_lazy_ghost_objects: false
+        
+        

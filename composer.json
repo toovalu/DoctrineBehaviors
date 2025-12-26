@@ -16,7 +16,7 @@
         "doctrine/common": "^3.5.0",
         "doctrine/persistence": "^4.0.0",
         "doctrine/dbal": "^4.0.0",
-        "doctrine/orm": "^3.4.1",
+        "doctrine/orm": "^3.4",
         "doctrine/doctrine-bundle": "^2.15",
         "symfony/cache": "^5.4|^6.0|^7.0|^7.0|^8.0",
         "symfony/dependency-injection": "^5.4|^6.0|^7.0|^8.0",
@@ -29,8 +29,7 @@
         "ramsey/uuid": "^4.2",
         "doctrine/lexer": "^3.0.0",
         "symfony/security-bundle": "^7.0|^8.0",
-        "monolog/monolog": "^3",
-        "symfony/var-exporter": "^7.4|^8.0"
+        "monolog/monolog": "^3"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
