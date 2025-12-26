@@ -12,7 +12,7 @@
         { "name": "Knplabs", "homepage": "http://knplabs.com" }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.4",
         "doctrine/common": "^3.5.0",
         "doctrine/persistence": "^4.0.0",
         "doctrine/dbal": "^4.0.0",
