@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\SoftDeletable\SoftDeletableEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\SoftDeletable\SoftDeletableEntityInherit;
+use Override;
 
 final class SoftDeletableTest extends AbstractBehaviorTestCase
 {
@@ -17,6 +18,7 @@ final class SoftDeletableTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $softDeletableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

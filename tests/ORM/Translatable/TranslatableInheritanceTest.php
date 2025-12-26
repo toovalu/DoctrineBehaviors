@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Translatable\ExtendedTranslatableEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Translatable\ExtendedTranslatableEntityTranslation;
+use Override;
 
 final class TranslatableInheritanceTest extends AbstractBehaviorTestCase
 {
@@ -16,6 +17,7 @@ final class TranslatableInheritanceTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $objectRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

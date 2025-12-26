@@ -77,7 +77,6 @@ final class StaticTranslationTypeHelper
         }
 
         return $nativeReflection
-            ->getMethod('getTranslatableEntityClass')
-            ->invoke(null);
+            ->getMethod('getTranslatableEntityClass')->invoke();
     }
 }

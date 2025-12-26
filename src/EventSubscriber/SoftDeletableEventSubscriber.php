@@ -12,12 +12,9 @@ use Knp\DoctrineBehaviors\Contract\Entity\SoftDeletableInterface;
 
 #[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::onFlush, priority: 500, connection: 'default')]
-final class SoftDeletableEventSubscriber
+final readonly class SoftDeletableEventSubscriber
 {
-    /**
-     * @var string
-     */
-    private const DELETED_AT = 'deletedAt';
+    private const string DELETED_AT = 'deletedAt';
 
      public function __construct(
          private EntityManagerInterface $entityManager,

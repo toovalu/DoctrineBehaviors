@@ -10,7 +10,7 @@ use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 class DefaultSluggableRepository
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 

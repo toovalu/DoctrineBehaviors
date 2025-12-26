@@ -19,12 +19,9 @@ use ReflectionClass;
 #[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::prePersist, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::preUpdate, priority: 500, connection: 'default')]
-final class SluggableEventSubscriber
+final readonly class SluggableEventSubscriber
 {
-    /**
-     * @var string
-     */
-    private const SLUG = 'slug';
+    private const string SLUG = 'slug';
 
     public function __construct(
         private EntityManagerInterface $entityManager,

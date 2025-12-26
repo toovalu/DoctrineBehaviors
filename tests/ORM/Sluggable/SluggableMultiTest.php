@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableMultiEntity;
+use Override;
 
 final class SluggableMultiTest extends AbstractBehaviorTestCase
 {
@@ -16,6 +17,7 @@ final class SluggableMultiTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $sluggableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

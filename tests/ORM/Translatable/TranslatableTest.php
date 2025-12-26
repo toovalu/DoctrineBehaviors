@@ -15,6 +15,7 @@ use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\TranslatableCustomizedEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\TranslatableEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\TranslatableEntityTranslation;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Translation\TranslatableCustomizedEntityTranslation;
+use Override;
 
 final class TranslatableTest extends AbstractBehaviorTestCase
 {
@@ -23,6 +24,7 @@ final class TranslatableTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $translatableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

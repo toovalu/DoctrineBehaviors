@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableWithoutRegenerateEntity;
+use Override;
 
 final class SluggableWithoutRegenerateTest extends AbstractBehaviorTestCase
 {
@@ -16,6 +17,7 @@ final class SluggableWithoutRegenerateTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $sluggableWithoutRegenerateRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

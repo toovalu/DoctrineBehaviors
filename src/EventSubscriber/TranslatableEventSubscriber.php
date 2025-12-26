@@ -20,12 +20,9 @@ use ReflectionClass;
 #[AsDoctrineListener(event: Events::prePersist, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::postLoad, priority: 500, connection: 'default')]
 #[AsDoctrineListener(event: Events::loadClassMetadata, priority: 500, connection: 'default')]
-final class TranslatableEventSubscriber
+final readonly class TranslatableEventSubscriber
 {
-    /**
-     * @var string
-     */
-    public const LOCALE = 'locale';
+    public const string LOCALE = 'locale';
 
     private int $translatableFetchMode;
 

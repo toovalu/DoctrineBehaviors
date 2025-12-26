@@ -9,6 +9,7 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Blameable\BlameableEntityWithUserEntity;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\UserEntity;
+use Override;
 
 final class BlameableWithEntityTest extends AbstractBehaviorTestCase
 {
@@ -21,6 +22,7 @@ final class BlameableWithEntityTest extends AbstractBehaviorTestCase
 
     private UserEntity $userEntity;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -81,6 +83,7 @@ final class BlameableWithEntityTest extends AbstractBehaviorTestCase
     /**
      * @return string[]
      */
+    #[Override]
     protected function provideCustomConfigs(): array
     {
         return [__DIR__.'/../../config/config_test_with_blameable_entity.php'];
