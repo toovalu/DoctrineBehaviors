@@ -29,7 +29,8 @@
         "ramsey/uuid": "^4.2",
         "doctrine/lexer": "^3.0.0",
         "symfony/security-bundle": "^7.0|^8.0",
-        "monolog/monolog": "^3"
+        "monolog/monolog": "^3",
+        "symfony/var-exporter": "^7.4|^8.0"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
