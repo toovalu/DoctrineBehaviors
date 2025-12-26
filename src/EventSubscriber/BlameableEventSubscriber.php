@@ -20,19 +20,10 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 #[AsDoctrineListener(event: Events::preRemove, priority: 500, connection: 'default')]
 final readonly class BlameableEventSubscriber
 {
-    /**
-     * @var string
-     */
     private const string DELETED_BY = 'deletedBy';
 
-    /**
-     * @var string
-     */
     private const string UPDATED_BY = 'updatedBy';
 
-    /**
-     * @var string
-     */
     private const string CREATED_BY = 'createdBy';
 
     public function __construct(

@@ -21,9 +21,6 @@ use ReflectionClass;
 #[AsDoctrineListener(event: Events::preUpdate, priority: 500, connection: 'default')]
 final readonly class SluggableEventSubscriber
 {
-    /**
-     * @var string
-     */
     private const string SLUG = 'slug';
 
     public function __construct(

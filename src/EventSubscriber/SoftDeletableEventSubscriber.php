@@ -14,9 +14,6 @@ use Knp\DoctrineBehaviors\Contract\Entity\SoftDeletableInterface;
 #[AsDoctrineListener(event: Events::onFlush, priority: 500, connection: 'default')]
 final readonly class SoftDeletableEventSubscriber
 {
-    /**
-     * @var string
-     */
     private const string DELETED_AT = 'deletedAt';
 
      public function __construct(
