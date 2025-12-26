@@ -8,7 +8,7 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-final class UserProvider implements UserProviderInterface
+final readonly class UserProvider implements UserProviderInterface
 {
     public function __construct(
         private Security $security,

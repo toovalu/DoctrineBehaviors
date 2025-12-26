@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Translatable;
 
+use Override;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
@@ -23,6 +24,7 @@ final class TranslatableTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $translatableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

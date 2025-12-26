@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Knp\DoctrineBehaviors\Tests\ORM\Sluggable;
 
 use DateTime;
+use Override;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableMultiEntity;
@@ -16,6 +17,7 @@ final class SluggableMultiTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $sluggableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

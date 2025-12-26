@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Blameable;
 
+use Override;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
@@ -23,6 +24,7 @@ final class BlameableTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $blameableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -131,6 +133,7 @@ final class BlameableTest extends AbstractBehaviorTestCase
     /**
      * @return string[]
      */
+    #[Override]
     protected function provideCustomConfigs(): array
     {
         return [__DIR__.'/../../config/config_test_with_blameable_entity.php'];

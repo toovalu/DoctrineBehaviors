@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Knp\DoctrineBehaviors\Logger\QueryLogger;
 
-final class DatabaseLoader
+final readonly class DatabaseLoader
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

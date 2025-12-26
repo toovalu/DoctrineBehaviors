@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM;
 
+use Override;
 use DateTime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
@@ -17,6 +18,7 @@ final class SoftDeletableTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $softDeletableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();

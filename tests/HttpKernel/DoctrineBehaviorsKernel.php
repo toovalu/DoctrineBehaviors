@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\HttpKernel;
 
+use Override;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\DoctrineBehaviors\DoctrineBehaviorsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -17,7 +18,7 @@ final class DoctrineBehaviorsKernel extends Kernel
      * @param string[] $configs
      */
     public function __construct(
-        private array $configs = [],
+        private readonly array $configs = [],
     ) {
         parent::__construct('test', false);
     }
@@ -30,11 +31,13 @@ final class DoctrineBehaviorsKernel extends Kernel
         return [new DoctrineBehaviorsBundle(), new DoctrineBundle(), new FrameworkBundle()];
     }
 
+    #[Override]
     public function getCacheDir(): string
     {
         return \sys_get_temp_dir().'/doctrine_behaviors_test';
     }
 
+    #[Override]
     public function getLogDir(): string
     {
         return \sys_get_temp_dir().'/doctrine_behaviors_test_log';

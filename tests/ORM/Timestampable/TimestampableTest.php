@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DoctrineBehaviors\Tests\ORM\Timestampable;
 
+use Override;
 use DateTime;
 use Doctrine\Persistence\ObjectRepository;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
@@ -16,6 +17,7 @@ final class TimestampableTest extends AbstractBehaviorTestCase
      */
     private ObjectRepository $timestampableRepository;
 
+    #[Override]
     protected function setUp(): void
     {
         parent::setUp();
