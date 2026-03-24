@@ -12,7 +12,7 @@ use Knp\DoctrineBehaviors\Exception\TranslatableException;
 trait TranslatableMethodsTrait
 {
     /**
-     * @return Collection<string, TranslationInterface>
+     * @return Collection<int, TranslationInterface>
      */
     public function getTranslations()
     {
@@ -24,7 +24,7 @@ trait TranslatableMethodsTrait
     }
 
     /**
-     * @param Collection<string, TranslationInterface> $translations
+     * @param Collection<int, TranslationInterface> $translations
      *
      * @phpstan-param iterable<TranslationInterface> $translations
      */
@@ -38,7 +38,7 @@ trait TranslatableMethodsTrait
     }
 
     /**
-     * @return Collection<string, TranslationInterface>
+     * @return Collection<int, TranslationInterface>
      */
     public function getNewTranslations(): Collection
     {
@@ -186,15 +186,18 @@ trait TranslatableMethodsTrait
     protected function findTranslationByLocale(string $locale, bool $withNewTranslations = true): ?TranslationInterface
     {
         $translation = $this->getTranslations()
-            ->get($locale);
+            ->filter(static fn(TranslationInterface $translation) => $translation->getLocale() === $locale)->first();
 
         if ($translation) {
             return $translation;
         }
 
         if ($withNewTranslations) {
-            return $this->getNewTranslations()
-                ->get($locale);
+            $newTranslation = $this->getNewTranslations()
+                ->filter(static fn(TranslationInterface $translation) => $translation->getLocale() === $locale)->first();
+            if ($newTranslation) {
+                return $newTranslation;
+            }
         }
 
         return null;
