@@ -100,7 +100,6 @@ final readonly class TranslatableEventSubscriber
         $classMetadata->mapOneToMany([
             'fieldName' => 'translations',
             'mappedBy' => 'translatable',
-            'indexBy' => self::LOCALE,
             'cascade' => ['persist', 'remove'],  //FIX ME Merge is not supported for Doctrine/Orm see https://github.com/slevomat/doctrine-orm/blob/master/UPGRADE.md
             'fetch' => $this->translatableFetchMode,
             'targetEntity' => $classMetadata->getReflectionClass()
