@@ -20,15 +20,41 @@ abstract class AbstractBehaviorTestCase extends TestCase
 
     private ContainerInterface $container;
 
+    private ?DoctrineBehaviorsKernel $kernel = null;
+
+    public static function setUpBeforeClass(): void
+    {
+        if (! extension_loaded('pdo_sqlite')) {
+            self::markTestSkipped(
+                'The pdo_sqlite PHP extension is required for integration tests (e.g. apt install php8.5-sqlite).'
+            );
+        }
+
+        parent::setUpBeforeClass();
+    }
+
     protected function setUp(): void
     {
-        $doctrineBehaviorsKernel = new DoctrineBehaviorsKernel($this->provideCustomConfigs());
-        $doctrineBehaviorsKernel->boot();
+        $this->kernel = new DoctrineBehaviorsKernel($this->provideCustomConfigs());
+        $this->kernel->boot();
 
-        $this->container = $doctrineBehaviorsKernel->getContainer();
+        $this->container = $this->kernel->getContainer();
 
         $this->entityManager = $this->getService('doctrine.orm.entity_manager');
         $this->loadDatabaseFixtures();
+    }
+
+    protected function tearDown(): void
+    {
+        if ($this->kernel !== null) {
+            $this->kernel->shutdown();
+            $this->kernel = null;
+        }
+
+        // Symfony's ErrorHandler stacks an exception handler; pop it so PHPUnit does not mark tests risky.
+        restore_exception_handler();
+
+        parent::tearDown();
     }
 
     protected function loadDatabaseFixtures(): void

@@ -124,14 +124,5 @@ final class SoftDeletableTest extends AbstractBehaviorTestCase
 
         $this->entityManager->remove($softDeletableEntity);
         $this->entityManager->flush();
-
-        // dd($logger);
-        // $this->assertCount(3, $debugStack->queries);
-        // $this->assertSame('"START TRANSACTION"', $debugStack->queries[1]['sql']);
-        // $this->assertSame(
-        //     'UPDATE SoftDeletableEntity SET deletedAt = ? WHERE id = ?',
-        //     $debugStack->queries[2]['sql']
-        // );
-        // $this->assertSame('"COMMIT"', $debugStack->queries[3]['sql']);
     }
 }

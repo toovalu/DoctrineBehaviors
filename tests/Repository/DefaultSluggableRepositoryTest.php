@@ -32,7 +32,7 @@ final class DefaultSluggableRepositoryTest extends TestCase
 
     public function testIsSlugUniqueFor(): void
     {
-        $sluggable =  $this->createMock(SluggableInterface::class);
+        $sluggable = $this->createStub(SluggableInterface::class);
         $entityClass = $sluggable::class;
         $uniqueSlug = 'foobar';
         $metadata = $this->createMock(ClassMetadata::class);
@@ -64,17 +64,37 @@ final class DefaultSluggableRepositoryTest extends TestCase
             ->with($entityClass, 'e')
             ->willReturnSelf();
 
+        $andWhereIndex = 0;
         $queryBuilder->expects(self::exactly(2))
             ->method('andWhere')
-            ->withConsecutive(['e.slug = :slug'], ['e.id.id != :id_id'])
-            ->willReturnSelf();
+            ->willReturnCallback(function (string $dql) use (&$andWhereIndex, $queryBuilder): QueryBuilder {
+                ++$andWhereIndex;
+                self::assertContains($andWhereIndex, [1, 2]);
+                self::assertSame(
+                    [1 => 'e.slug = :slug', 2 => 'e.id.id != :id_id'][$andWhereIndex],
+                    $dql
+                );
 
+                return $queryBuilder;
+            });
+
+        $setParameterIndex = 0;
         $queryBuilder->expects(self::exactly(2))
             ->method('setParameter')
-            ->withConsecutive(['slug', $uniqueSlug], ['id_id', '123'])
-            ->willReturnSelf();
+            ->willReturnCallback(function (string $name, mixed $value) use (&$setParameterIndex, $queryBuilder, $uniqueSlug): QueryBuilder {
+                ++$setParameterIndex;
+                self::assertContains($setParameterIndex, [1, 2]);
+                if ($setParameterIndex === 1) {
+                    self::assertSame('slug', $name);
+                    self::assertSame($uniqueSlug, $value);
+                } else {
+                    self::assertSame('id_id', $name);
+                    self::assertSame('123', $value);
+                }
 
-        //  dd($queryBuilder->getQuery());
+                return $queryBuilder;
+            });
+
         $queryBuilder->expects(self::once())
             ->method('getQuery')
             ->willReturn($query = $this->createMock(Query::class));

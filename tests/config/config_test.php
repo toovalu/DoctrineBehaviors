@@ -7,7 +7,7 @@ use Knp\DoctrineBehaviors\Contract\Provider\UserProviderInterface;
 use Knp\DoctrineBehaviors\Tests\DatabaseLoader;
 use Knp\DoctrineBehaviors\Tests\Provider\TestLocaleProvider;
 use Knp\DoctrineBehaviors\Tests\Provider\TestUserProvider;
-use Psr\Log\Test\TestLogger;
+use Psr\Log\NullLogger;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -35,7 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(Security::class)
         ->arg('$container', service('service_container'));
 
-    $services->set(TestLogger::class);
+    $services->set(NullLogger::class);
 
     $services->set(TestLocaleProvider::class);
     $services->alias(LocaleProviderInterface::class, TestLocaleProvider::class);
