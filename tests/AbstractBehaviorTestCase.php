@@ -20,7 +20,7 @@ abstract class AbstractBehaviorTestCase extends TestCase
 
     private ContainerInterface $container;
 
-    private ?DoctrineBehaviorsKernel $kernel = null;
+    private ?DoctrineBehaviorsKernel $doctrineBehaviorsKernel = null;
 
     public static function setUpBeforeClass(): void
     {
@@ -35,10 +35,10 @@ abstract class AbstractBehaviorTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $this->kernel = new DoctrineBehaviorsKernel($this->provideCustomConfigs());
-        $this->kernel->boot();
+        $this->doctrineBehaviorsKernel = new DoctrineBehaviorsKernel($this->provideCustomConfigs());
+        $this->doctrineBehaviorsKernel->boot();
 
-        $this->container = $this->kernel->getContainer();
+        $this->container = $this->doctrineBehaviorsKernel->getContainer();
 
         $this->entityManager = $this->getService('doctrine.orm.entity_manager');
         $this->loadDatabaseFixtures();
@@ -46,9 +46,9 @@ abstract class AbstractBehaviorTestCase extends TestCase
 
     protected function tearDown(): void
     {
-        if ($this->kernel !== null) {
-            $this->kernel->shutdown();
-            $this->kernel = null;
+        if ($this->doctrineBehaviorsKernel !== null) {
+            $this->doctrineBehaviorsKernel->shutdown();
+            $this->doctrineBehaviorsKernel = null;
         }
 
         // Symfony's ErrorHandler stacks an exception handler; pop it so PHPUnit does not mark tests risky.
