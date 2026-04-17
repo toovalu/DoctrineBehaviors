@@ -10,6 +10,7 @@ use Iterator;
 use Knp\DoctrineBehaviors\Tests\AbstractBehaviorTestCase;
 use Knp\DoctrineBehaviors\Tests\Fixtures\Entity\Sluggable\SluggableEntity;
 use Override;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 final class SluggableTest extends AbstractBehaviorTestCase
 {
@@ -46,9 +47,7 @@ final class SluggableTest extends AbstractBehaviorTestCase
         $this->assertSame('the-name', $entity->getSlug());
     }
 
-    /**
-     * @dataProvider provideDataForTest()
-     */
+    #[DataProvider('provideDataForTest')]
     public function testNotUpdatedSlug(string $value, string $expectedSlug): void
     {
         $sluggableEntity = new SluggableEntity();
@@ -65,7 +64,7 @@ final class SluggableTest extends AbstractBehaviorTestCase
         $this->assertSame($expectedSlug, $sluggableEntity->getSlug());
     }
 
-    public function provideDataForTest(): Iterator
+    public static function provideDataForTest(): Iterator
     {
         yield ['The name', 'the-name'];
         yield ['Löic & René', 'loic-rene'];
