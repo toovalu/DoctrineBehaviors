@@ -46,7 +46,7 @@ abstract class AbstractBehaviorTestCase extends TestCase
 
     protected function tearDown(): void
     {
-        if ($this->doctrineBehaviorsKernel !== null) {
+        if ($this->doctrineBehaviorsKernel instanceof DoctrineBehaviorsKernel) {
             $this->doctrineBehaviorsKernel->shutdown();
             $this->doctrineBehaviorsKernel = null;
         }
